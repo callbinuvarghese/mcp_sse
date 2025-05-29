@@ -1,0 +1,202 @@
+ 
+ https://www.youtube.com/watch?v=AqECks9B23Q&t=218s
+
+ https://medium.com/data-engineering-with-dremio/building-a-basic-mcp-server-with-python-4c34c41031ed
+ 
+ uv init mcpworks
+ cd mcpworks
+
+ uv add mcp arxiv
+
+ touch research_server.py
+
+Test the MCP server with MCP inspector Tool
+
+npx @modelcontextprotocol/inspector uv run research_server.py
+
+➜  mcpworks git:(master) ✗ npx @modelcontextprotocol/inspector uv run research_server.py
+Starting MCP inspector...
+⚙️ Proxy server listening on port 6277
+🔍 MCP Inspector is up and running at http://127.0.0.1:6274 🚀
+
+
+MCP inspector running on the following address
+http://127.0.0.1:6274
+
+Connect.
+
+Tools->List Tools
+
+Select the Tool function. Then "Run Tool" to test with STDIO.
+
+
+search_papers->Function to list research papers on topic: "Quantum Computing" max_results=5
+Run Tool
+    Tool Result: Success
+
+    "2208.00733v1"
+
+    "quant-ph/0003151v1"
+
+    "1311.4939v1"
+
+    "1210.0736v1"
+
+    "1610.02500v1"
+
+extract_info-> paper_id=quant-ph/0003151v
+Run Tool
+    Tool Result: Success
+
+    {
+        title:
+        "Unconventional Quantum Computing Devices"
+        authors:[
+            0:
+            "Seth Lloyd"
+        ]
+        summary:
+            "This paper investigates a variety of unconventional quantum computation
+            devices, including fermionic quantum computers and computers that exploit
+            nonlinear quantum mechanics. It is shown that unconventional quantum computing
+            devices can in principle compute some quantities more rapidly than
+            `conventional' quantum computers."
+        pdf_url:
+            "http://arxiv.org/pdf/quant-ph/0003151v1"
+        published:
+            "2000-03-31"
+    }
+
+
+MCP Inspector-> Resources->List Resources
+Resources list empty
+Resources Templates-> lists "greeting"
+
+greeting://Binu
+Refresh
+
+{
+    contents:
+    [
+        0:
+        {
+            uri:
+                "greeting://Binu"
+            mimeType:
+                "text/plain"
+            text:
+                "Hello, Binu! Welcome to the research server."
+        }
+    ]
+}
+
+
+https://medium.com/data-engineering-with-dremio/building-a-basic-mcp-server-with-python-4c34c41031ed
+uv add "mcp[cli]" pandas pyarrow
+mkdir data tools utils
+touch data/sample.csv
+vi data/sample.csv
+id,name,email,signup_date
+1,Alice Johnson,alice@example.com,2023-01-15
+2,Bob Smith,bob@example.com,2023-02-22
+3,Carol Lee,carol@example.com,2023-03-10
+4,David Wu,david@example.com,2023-04-18
+5,Eva Brown,eva@example.com,2023-05-30
+
+touch generate_parquet.py
+➜  mcpworks git:(master) ✗ uv run generate_parquet.py
+
+➜  mcpworks git:(master) ✗ ls data
+sample.csv     sample.parquet
+
+touch utils/file_reader.py
+
+➜  mcpworks git:(master) ✗ python utils/file_reader.py
+CSV file 'sample.csv' has 5 rows and 4 columns.
+Parquet file 'sample.parquet' has 5 rows and 4 columns.
+
+touch server.py and main.py
+
+touch tools/csv_tools.py
+touch tools/parquet_tools.py
+
+➜  mcpworks git:(master) ✗ uv run main.py
+
+touch tools/research_tools.py
+➜  mcpworks git:(master) ✗ npx @modelcontextprotocol/inspector uv run main.py
+
+mv main.py main_stdio.py
+touch main_sse.py
+
+➜  mcpworks git:(master) ✗ uv run main_sse.py
+INFO:     Started server process [53551]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+
+test the server with browser. Point browser to
+http://localhost:8080/sse
+
+event: endpoint
+data: /messages/?session_id=9c799045c2a3467288abdb55148ae7c4
+
+: ping - 2025-05-29 21:46:53.730878+00:00
+
+: ping - 2025-05-29 21:47:08.732279+00:00
+
+: ping - 2025-05-29 21:47:23.733927+00:00
+
+: ping - 2025-05-29 21:47:38.734566+00:00
+
+The above tells the server is listening on SSE
+
+Test SSE using Postman
+
+Postman -> New ->MCP server->
+HTTP : http://localhost:8080/sse
+
+Message->Tools
+
+See the functions listed and test them from Postman
+
+Each of the functions are working.
+Message->Resources
+See the Resources listed here. That also tested good.
+
+
+The following is the console logs from the server that is running "uv run main_sse.py"
+
+INFO:     127.0.0.1:57223 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:53:37] INFO     Processing request of type            server.py:556
+                             ListResourcesRequest
+INFO:     127.0.0.1:57224 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+                    INFO     Processing request of type            server.py:556
+                             ListToolsRequest
+                    INFO     Processing request of type            server.py:556
+                             ListPromptsRequest
+                    INFO     Processing request of type            server.py:556
+                             ListResourceTemplatesRequest
+INFO:     127.0.0.1:57251 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:54:02] INFO     Processing request of type            server.py:556
+                             CallToolRequest
+INFO:     127.0.0.1:57260 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:54:16] INFO     Processing request of type            server.py:556
+                             CallToolRequest
+INFO:     127.0.0.1:57280 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:54:44] INFO     Processing request of type            server.py:556
+                             CallToolRequest
+                    INFO     Requesting page (first: True, try:  __init__.py:680
+                             0):
+                             https://export.arxiv.org/api/query?
+                             search_query=quantum+computing&id_l
+                             ist=&sortBy=relevance&sortOrder=des
+                             cending&start=0&max_results=100
+                    INFO     Got first page: 5 of 1041962 total  __init__.py:606
+                             results
+Results are saved in: papers/quantum_computing/papers_info.json
+INFO:     127.0.0.1:57305 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:55:02] INFO     Processing request of type            server.py:556
+                             CallToolRequest
+INFO:     127.0.0.1:57551 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
+[05/29/25 17:59:44] INFO     Processing request of type            server.py:556
+                             ReadResourceRequest
