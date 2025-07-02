@@ -1,0 +1,226 @@
+#https://cloud.google.com/blog/topics/developers-practitioners/use-google-adk-and-mcp-with-an-external-server
+
+MCP Server with tools defined 
+Google ADK Agent using tools definitions on MCP Server
+
+➜  mcp cd goog-adk-mcp-agents
+➜  goog-adk-mcp-agents uv init wikiservermcp
+Initialized project `wikiservermcp` at `/Users/binu.b.varghese/source/mcp/goog-adk-mcp-agents/wikiservermcp`
+➜  goog-adk-mcp-agents ls
+wikiservermcp
+➜  goog-adk-mcp-agents cd wikiservermcp
+➜  wikiservermcp git:(master) ✗ source .venv/bin/activate
+(.venv) ➜  wikiservermcp git:(master) ✗ uv run run.py
+
+--host 127.0.0.1 is added to prevent CORS issues.
+As by default the MCP was taking localhost and the MCP Inspector was taking 127.0.0.1
+Causing CORS errors. Adding host option resolved those issues..
+
+(.venv) ➜  wikiservermcp git:(master) ✗ uv run run.py --host 127.0.0.1
+INFO:     Started server process [82089]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+startup
+2025-07-01 11:44:09.804 | DEBUG    | __main__:handle_sse:40 - Handling SSE request
+2025-07-01 11:44:09.804 | DEBUG    | __main__:handle_sse:42 - Received proxy session token: None
+INFO:     127.0.0.1:56163 - "GET /sse HTTP/1.1" 200 OK
+connected with MCP Inspector
+INFO:     127.0.0.1:56165 - "POST /messages/?session_id=22a8c5e33b6d4e76a6b0e06aa43cb60b HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:56165 - "POST /messages/?session_id=22a8c5e33b6d4e76a6b0e06aa43cb60b HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:56188 - "POST /messages/?session_id=22a8c5e33b6d4e76a6b0e06aa43cb60b HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:56235 - "POST /messages/?session_id=22a8c5e33b6d4e76a6b0e06aa43cb60b HTTP/1.1" 202 Accepted
+2025-07-01 11:44:41.573 | DEBUG    | tools.wikipedia_urlgetter:extract_wikipedia_article:24 - Extracting Wikipedia article from URL: https://en.wikipedia.org/wiki/Kuberaa
+testing with MCP Inspector
+^CINFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+^C
+^C
+INFO:     Finished server process [82089]
+
+Test with MCP Inspector
+(.venv) ➜  wikiservermcp git:(master) ✗ uv run mcp dev run.py
+Need to install the following packages:
+@modelcontextprotocol/inspector@0.15.0
+Ok to proceed? (y) y
+
+Starting MCP inspector...
+⚙️ Proxy server listening on 127.0.0.1:6277
+🔑 Session token: a6641c5f82601dd39de4ecc118fbee1ba3eafb761a9c5073f388ce4c1f75b955
+Use this token to authenticate requests or set DANGEROUSLY_OMIT_AUTH=true to disable auth
+
+🔗 Open inspector with token pre-filled:
+   http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=a6641c5f82601dd39de4ecc118fbee1ba3eafb761a9c5073f388ce4c1f75b955
+
+🔍 MCP Inspector is up and running at http://127.0.0.1:6274 🚀
+
+Browser point to http://127.0.0.1:6274
+
+MCP Inspector
+Transport type: SSE
+URL: http://127.0.0.1:8001/sse
+Configuration-> Proxy Session Token-> Past the token from MCP_PROXY_AUTH_TOKEN displayed on the MCP Inspector running console.
+Connect
+Tools->See tool definitions extract_wikipedia_article
+Run tool with url : https://en.wikipedia.org/wiki/Kuberaa
+You see the tool result
+
+
+Google ADK Agent as MCP Client
+-----------------------------
+uv init agentclientmcp
+cd agentclientmcp
+python -m venv .venv
+source .venv/bin/activate
+
+(.venv) ➜  agentclientmcp mkdir agentclientmcp/wikimcp_agent ( Agent name and the directory should match for adk web to identify)
+(.venv) ➜  agentclientmcp echo "from . import agent" > agentclientmcp/wikimcp_agent/__init__.py
+(.venv) ➜  agentclientmcp touch agentclientmcp/wikimcp_agent/agent.py
+(.venv) ➜  agentclientmcp git:(master) ✗ ls
+pyproject.toml README.md      uv.lock        wikimcp_agent
+
+Try agent
+.venv) ➜  agentclientmcp git:(master) ✗ uv run adk web
+INFO:     Started server process [79695]
+INFO:     Waiting for application startup.
+
++-----------------------------------------------------------------------------+
+| ADK Web Server started                                                      |
+|                                                                             |
+| For local testing, access at http://localhost:8000.                         |
++-----------------------------------------------------------------------------+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+
+Browser navigate to http://localhost:8000/dev-ui?app=wikimcp_agent
+Select 'wikimcp_agent'
+Query: summarize content from https://en.wikipedia.org/wiki/C11H18N2O3
+
+MCP Server console
+--
+(.venv) ➜  wikiservermcp git:(master) ✗ uv run run.py
+INFO:     Started server process [96117]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54299 - "GET /sse HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54305 - "POST /messages/?session_id=10058c5203484b818aa2bcc0b989b779 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54305 - "POST /messages/?session_id=10058c5203484b818aa2bcc0b989b779 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54305 - "POST /messages/?session_id=10058c5203484b818aa2bcc0b989b779 HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54305 - "POST /messages/?session_id=10058c5203484b818aa2bcc0b989b779 HTTP/1.1" 202 Accepted
+2025-07-01 17:29:47.492 | DEBUG    | tools.wikipedia_urlgetter:extract_wikipedia_article:24 - Extracting Wikipedia article from URL: https://en.wikipedia.org/wiki/C11H18N2O3
+
+Agent console
+---
+(.venv) ➜  agentclientmcp git:(master) ✗ uv run adk web
+INFO:     Started server process [79695]
+INFO:     Waiting for application startup.
+
++-----------------------------------------------------------------------------+
+| ADK Web Server started                                                      |
+|                                                                             |
+| For local testing, access at http://localhost:8000.                         |
++-----------------------------------------------------------------------------+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54160 - "GET /dev-ui?app=wikimcp_agent HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54160 - "GET /list-apps?relative_path=./ HTTP/1.1" 200 OK
+2025-07-01 17:28:32,980 - INFO - fast_api.py:313 - New session created
+INFO:     127.0.0.1:54162 - "POST /apps/wikimcp_agent/users/user/sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54160 - "GET /apps/wikimcp_agent/eval_sets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54160 - "GET /apps/wikimcp_agent/users/user/sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54160 - "GET /apps/wikimcp_agent/users/user/sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54296 - "POST /run_sse HTTP/1.1" 200 OK
+2025-07-01 17:29:46,170 - INFO - envs.py:47 - Loaded .env file for wikimcp_agent at /Users/binu.b.varghese/source/mcp/goog-adk-mcp-agents/agentclientmcp/.env
+2025-07-01 17:29:46,272 - INFO - sse.py:45 - Connecting to SSE endpoint: http://localhost:8001/sse
+2025-07-01 17:29:46,683 - INFO - _client.py:1740 - HTTP Request: GET http://localhost:8001/sse "HTTP/1.1 200 OK"
+2025-07-01 17:29:46,684 - INFO - sse.py:65 - Received endpoint URL: http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779
+2025-07-01 17:29:46,684 - INFO - sse.py:135 - Starting post writer with endpoint URL: http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779
+2025-07-01 17:29:46,691 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779 "HTTP/1.1 202 Accepted"
+2025-07-01 17:29:46,697 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779 "HTTP/1.1 202 Accepted"
+2025-07-01 17:29:46,699 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779 "HTTP/1.1 202 Accepted"
+MCP Toolset created successfully.
+Fetched 1 tools from MCP server.
+2025-07-01 17:29:46,723 - INFO - google_llm.py:83 - Sending out request, model: gemini-2.0-flash, backend: ml_dev, stream: False
+2025-07-01 17:29:46,723 - INFO - google_llm.py:89 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+Help user extract and summarize the article from wikipedia link.
+        Use the following tools to extract wikipedia article:
+        - extract_wikipedia_article
+
+        Once you retrieve the article, always summarize it in a few sentences for the user.
+
+
+You are an agent. Your internal name is "assistant".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"summarize content from https://en.wikipedia.org/wiki/C11H18N2O3"}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+extract_wikipedia_article: {'url': {'type': <Type.STRING: 'STRING'>}} -> None
+-----------------------------------------------------------
+
+2025-07-01 17:29:46,723 - INFO - models.py:7466 - AFC is enabled with max remote calls: 10.
+2025-07-01 17:29:47,483 - INFO - _client.py:1740 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-01 17:29:47,486 - WARNING - types.py:4707 - Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-07-01 17:29:47,487 - INFO - google_llm.py:145 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+None
+-----------------------------------------------------------
+Function calls:
+name: extract_wikipedia_article, args: {'url': 'https://en.wikipedia.org/wiki/C11H18N2O3'}
+-----------------------------------------------------------
+Raw response:
+{"candidates":[{"content":{"parts":[{"function_call":{"args":{"url":"https://en.wikipedia.org/wiki/C11H18N2O3"},"name":"extract_wikipedia_article"}}],"role":"model"},"finish_reason":"STOP","avg_logprobs":2.0087967501380123e-7}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":26,"candidates_tokens_details":[{"modality":"TEXT","token_count":26}],"prompt_token_count":153,"prompt_tokens_details":[{"modality":"TEXT","token_count":153}],"total_token_count":179},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-01 17:29:47,488 - INFO - fast_api.py:634 - Generated event in agent run streaming: {"content":{"parts":[{"functionCall":{"id":"adk-fdfdfc02-c314-4b70-b409-3309c247c54f","args":{"url":"https://en.wikipedia.org/wiki/C11H18N2O3"},"name":"extract_wikipedia_article"}}],"role":"model"},"invocation_id":"e-aaea12b8-d22e-4322-a81c-0e88220afbfd","author":"assistant","actions":{"state_delta":{},"artifact_delta":{},"requested_auth_configs":{}},"long_running_tool_ids":[],"id":"OFyiWN4m","timestamp":1751405386.70786}
+2025-07-01 17:29:47,491 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/messages/?session_id=10058c5203484b818aa2bcc0b989b779 "HTTP/1.1 202 Accepted"
+2025-07-01 17:29:47,667 - INFO - fast_api.py:634 - Generated event in agent run streaming: {"content":{"parts":[{"functionResponse":{"id":"adk-fdfdfc02-c314-4b70-b409-3309c247c54f","name":"extract_wikipedia_article","response":{"result":{"content":[{"type":"text","text":"[![](//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Timoxelin_barbebutenol.png/250px-\nTimoxelin_barbebutenol.png)](/wiki/File:Timoxelin_barbebutenol.png)Structure\nof the fictional drug Timoxeline Barbebutenol, as shown in the film _[Johnny\nEnglish Reborn](/wiki/Johnny_English_Reborn \"Johnny English Reborn\")_\n\nThe molecular formula **C 11H18N2O3** (molar mass: 226.27 g/mol) may be\nreferred as:\n\n  * [Amobarbital](/wiki/Amobarbital \"Amobarbital\")\n  * [Pentobarbital](/wiki/Pentobarbital \"Pentobarbital\")\n  * **Timoxeline Barbebutenol** , a fictional drug in the film _[Johnny English Reborn](/wiki/Johnny_English_Reborn \"Johnny English Reborn\")_\n\n[![Disambiguation\nicon](//upload.wikimedia.org/wikipedia/commons/thumb/8/8c/DAB_list_gray.svg/40px-\nDAB_list_gray.svg.png)](/wiki/File:DAB_list_gray.svg)\n\nIndex of chemical compounds with the same molecular formula\n\nThis [set index](/wiki/Wikipedia:SETINDEX \"Wikipedia:SETINDEX\") page lists\nchemical structure articles associated with the [same](/wiki/Isomer \"Isomer\")\n[molecular formula](/wiki/Molecular_formula \"Molecular formula\").  \nIf an [internal\nlink](https://en.wikipedia.org/w/index.php?title=Special:WhatLinksHere/C11H18N2O3&namespace=0)\nled you here, you may wish to change the link to point directly to the\nintended article.\n\n![](https://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1&usesul3=1)\n\nRetrieved from\n\"[https://en.wikipedia.org/w/index.php?title=C11H18N2O3&oldid=1267980976](https://en.wikipedia.org/w/index.php?title=C11H18N2O3&oldid=1267980976)\"\n\n"}],"isError":false}}}}],"role":"user"},"invocation_id":"e-aaea12b8-d22e-4322-a81c-0e88220afbfd","author":"assistant","actions":{"state_delta":{},"artifact_delta":{},"requested_auth_configs":{}},"id":"3srw4bBw","timestamp":1751405387.667777}
+2025-07-01 17:29:47,679 - INFO - google_llm.py:83 - Sending out request, model: gemini-2.0-flash, backend: ml_dev, stream: False
+2025-07-01 17:29:47,679 - INFO - google_llm.py:89 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+Help user extract and summarize the article from wikipedia link.
+        Use the following tools to extract wikipedia article:
+        - extract_wikipedia_article
+
+        Once you retrieve the article, always summarize it in a few sentences for the user.
+
+
+You are an agent. Your internal name is "assistant".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"summarize content from https://en.wikipedia.org/wiki/C11H18N2O3"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"url":"https://en.wikipedia.org/wiki/C11H18N2O3"},"name":"extract_wikipedia_article"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"extract_wikipedia_article","response":{"result":{"content":[{"type":"text","text":"[![](//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Timoxelin_barbebutenol.png/250px-\nTimoxelin_barbebutenol.png)](/wiki/File:Timoxelin_barbebutenol.png)Structure\nof the fictional drug Timoxeline Barbebutenol, as shown in the film _[Johnny\nEnglish Reborn](/wiki/Johnny_English_Reborn \"Johnny English Reborn\")_\n\nThe molecular formula **C 11H18N2O3** (molar mass: 226.27 g/mol) may be\nreferred as:\n\n  * [Amobarbital](/wiki/Amobarbital \"Amobarbital\")\n  * [Pentobarbital](/wiki/Pentobarbital \"Pentobarbital\")\n  * **Timoxeline Barbebutenol** , a fictional drug in the film _[Johnny English Reborn](/wiki/Johnny_English_Reborn \"Johnny English Reborn\")_\n\n[![Disambiguation\nicon](//upload.wikimedia.org/wikipedia/commons/thumb/8/8c/DAB_list_gray.svg/40px-\nDAB_list_gray.svg.png)](/wiki/File:DAB_list_gray.svg)\n\nIndex of chemical compounds with the same molecular formula\n\nThis [set index](/wiki/Wikipedia:SETINDEX \"Wikipedia:SETINDEX\") page lists\nchemical structure articles associated with the [same](/wiki/Isomer \"Isomer\")\n[molecular formula](/wiki/Molecular_formula \"Molecular formula\").  \nIf an [internal\nlink](https://en.wikipedia.org/w/index.php?title=Special:WhatLinksHere/C11H18N2O3&namespace=0)\nled you here, you may wish to change the link to point directly to the\nintended article.\n\n![](https://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1&usesul3=1)\n\nRetrieved from\n\"[https://en.wikipedia.org/w/index.php?title=C11H18N2O3&oldid=1267980976](https://en.wikipedia.org/w/index.php?title=C11H18N2O3&oldid=1267980976)\"\n\n"}],"isError":false}}}}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+extract_wikipedia_article: {'url': {'type': <Type.STRING: 'STRING'>}} -> None
+-----------------------------------------------------------
+
+2025-07-01 17:29:47,679 - INFO - models.py:7466 - AFC is enabled with max remote calls: 10.
+2025-07-01 17:29:48,629 - INFO - _client.py:1740 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 200 OK"
+2025-07-01 17:29:48,631 - INFO - google_llm.py:145 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+The Wikipedia page for C11H18N2O3 is a set index page listing chemical compounds with the same molecular formula. It indicates that this formula may refer to Amobarbital, Pentobarbital, or Timoxeline Barbebutenol, a fictional drug from the movie Johnny English Reborn.
+
+-----------------------------------------------------------
+Function calls:
+
+-----------------------------------------------------------
+Raw response:
+{"candidates":[{"content":{"parts":[{"text":"The Wikipedia page for C11H18N2O3 is a set index page listing chemical compounds with the same molecular formula. It indicates that this formula may refer to Amobarbital, Pentobarbital, or Timoxeline Barbebutenol, a fictional drug from the movie Johnny English Reborn.\n"}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.08352750539779663}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":64,"candidates_tokens_details":[{"modality":"TEXT","token_count":64}],"prompt_token_count":728,"prompt_tokens_details":[{"modality":"TEXT","token_count":728}],"total_token_count":792},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-01 17:29:48,631 - INFO - fast_api.py:634 - Generated event in agent run streaming: {"content":{"parts":[{"text":"The Wikipedia page for C11H18N2O3 is a set index page listing chemical compounds with the same molecular formula. It indicates that this formula may refer to Amobarbital, Pentobarbital, or Timoxeline Barbebutenol, a fictional drug from the movie Johnny English Reborn.\n"}],"role":"model"},"invocation_id":"e-aaea12b8-d22e-4322-a81c-0e88220afbfd","author":"assistant","actions":{"state_delta":{},"artifact_delta":{},"requested_auth_configs":{}},"id":"COSegBza","timestamp":1751405387.668698}
+INFO:     127.0.0.1:54296 - "GET /apps/wikimcp_agent/users/user/sessions/3f4b2ebb-f084-4a62-ba62-7fd5e2bc7199 HTTP/1.1" 200 OK

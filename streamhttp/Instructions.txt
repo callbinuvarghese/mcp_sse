@@ -1,0 +1,156 @@
+
+# https://github.com/invariantlabs-ai/mcp-streamable-http
+
+➜  mcp cd streamhttp
+
+Python sample
+--------------
+➜  streamhttp md python-sample
+
+➜  python-sample uv init server
+Initialized project `server` at `/Users/binu.b.varghese/source/mcp/streamhttp/server`
+➜  python-sample ls
+server
+➜  python-sample uv init client
+Initialized project `client` at `/Users/binu.b.varghese/source/mcp/streamhttp/client`
+➜  python-sample ls
+➜  python-sample ls
+client server
+
+Server
+-------
+➜  python-sample cd server
+➜  server git:(master) ✗ ls
+main.py        pyproject.toml README.md
+➜  server git:(master) ✗ python -m venv .venv
+➜  server git:(master) ✗ source .venv/bin/activate
+(.venv) ➜  server git:(master) ✗ uv add httpx
+(.venv) ➜  server git:(master) ✗ uv add mcp
+touch __init__.py
+edit pyproject.toml for buildtools
+rm main.py
+touch run.py
+touch server.py
+mkdir data 
+mkdir tools
+touch tools/__init__.py
+touch tools/sqlitee_explorer.py
+touch tools/weather.py
+
+Run server
+
+(.venv) ➜  server git:(master) ✗ uv run run.py
+SQLiteExplorer tools Using database path: data/sqlite.db
+2025-06-30 16:26:51.742 | DEBUG    | tools.sqlite_explorer:<module>:19 - Using database path: data/sqlite.db
+2025-06-30 16:26:51.994 | INFO     | __main__:<module>:18 - MCP Streamable HTTP server is starting...
+WARNING:  ASGI app factory detected. Using it, but please consider setting the --factory flag explicitly.
+INFO:     Started server process [98157]
+INFO:     Waiting for application startup.
+StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:8123 (Press CTRL+C to quit)
+
+Client
+-------
+➜  streamhttp cd client
+➜  client git:(master) ✗ python -m venv .venv
+source .venv/bin/activate
+
+rm main.py
+(.venv) ➜  client git:(master) ✗ uv add anthropic
+(.venv) ➜  client git:(master) ✗ uv add mcp
+(.venv) ➜  client git:(master) ✗ uv add python-dotenv
+touch client.py
+
+(.venv) ➜  client git:(master) ✗ ls
+__init__.py    client.py      pyproject.toml README.md      uv.lock
+(.venv) ➜  client git:(master) ✗ uv run client.py
+
+MCP Client Started!
+Type your queries or 'quit' to exit.
+
+Query: Get weather alerts for Georgia
+
+I'll help you get the weather alerts for Georgia using the `get_alerts` function. Since the function requires a two-letter state code, I'll use "GA" for Georgia.
+[Calling tool get_alerts with args {'state': 'GA'}]
+I have checked and there are currently no active weather alerts for the state of Georgia.
+
+For the most up-to-date weather alerts, you can always check:
+- The National Weather Service website (weather.gov)
+- Your local weather station
+- Weather apps on your mobile device
+
+Query: ^C
+
+
+Server Log on Client Connect
+
+(.venv) ➜  client git:(master) ✗ uv run client.py
+
+MCP Client Started!
+Type your queries or 'quit' to exit.
+
+Query:
+
+Server log at this Connect
+
+INFO:     ::1:61891 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: 1476c69a9c5f4cf09a07ae69159fed7d
+INFO:     ::1:61891 - "POST /mcp/ HTTP/1.1" 200 OK
+
+Query: How can you help
+
+I can help you with several things using the available tools:
+
+1. Database Queries:
+- I can show you what tables are in the database
+- I can describe the structure of specific tables
+- I can run SELECT queries to get data from the database
+
+2. Weather Information:
+- I can get weather alerts for any US state (using the two-letter state code)
+- I can get weather forecasts for specific locations (when provided with latitude and longitude coordinates)
+
+Let me know what specific information you'd like to see! For example, I can:
+- Show you the available database tables
+- Get weather alerts for a specific state
+- Get a weather forecast for a location (would need coordinates)
+- Query specific data from the database
+
+What would you like to know more about?
+
+INFO:     ::1:61891 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:62170 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:62171 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:62170 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:62171 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:62172 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:62172 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+
+Query: Show tables
+
+I'll help you list all the tables in the database using the `list_tables` function.
+[Calling tool list_tables with args {}]
+It looks like there might be some formatting issues in your message. From what I can see, you have three tables:
+
+1. orders
+2. products
+3. users
+
+And there seems to be a reference to "sqlite_sequence" which is a system table in SQLite databases.
+
+Would you like to know more about any of these tables or would you like to perform any specific operations with them?
+
+Query:
+
+INFO:     ::1:62328 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:62328 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:62333 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:62333 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-06-30 16:33:04.084 | DEBUG    | tools.sqlite_explorer:list_tables:106 - Listing all tables in the database
+2025-06-30 16:33:04.090 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-06-30 16:33:04.092 | DEBUG    | tools.sqlite_explorer:list_tables:120 - Tables found: ['orders', 'products', 'sqlite_sequence', 'users']
+2025-06-30 16:33:04.092 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
