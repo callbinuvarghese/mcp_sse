@@ -1,6 +1,11 @@
 # mcp_sse
 MCP SSE and STDIO
 
+MCP Works
+-----------
+An MCP Server that can be used to serve any new tool calls.
+Tested the tool calls with MCP Inspector, Anthropic and Postman
+
 Steamable HTTP
 ----------------
 MCP Server which binds StreambleHTTP and SSE
