@@ -1,0 +1,271 @@
+SuperGateway is an MCP server gateway, that can run external MCP servers locally.
+This can expose external MCP servers running locally and expose them on ports specified.
+
+npx -y supergateway \
+    --stdio "npx -y @modelcontextprotocol/server-filesystem ~/Downloads/txt" \
+    --outputTransport streamableHttp \
+    --port 8001
+
+➜  server_supergateway git:(mcp-streamhttp) ✗ ./server.sh
+[supergateway] Starting...
+[supergateway] Supergateway is supported by Supermachine (hosted MCPs) - https://supermachine.ai
+[supergateway]   - outputTransport: streamableHttp
+[supergateway] Running stateless server
+[supergateway]   - Headers: (none)
+[supergateway]   - port: 8001
+[supergateway]   - stdio: npx -y @modelcontextprotocol/server-filesystem ~/Downloads/txt
+[supergateway]   - streamableHttpPath: /mcp
+[supergateway]   - CORS: disabled
+[supergateway]   - Health endpoints: (none)
+[supergateway] Listening on port 8001
+[supergateway] StreamableHttp endpoint: http://localhost:8001/mcp
+
+
+➜  ~ ls ~/Downloads/txt
+brka-10k.txt
+IAM 101 Summary.txt
+MortgagePayoffLetter6560NamonWallaceDr.txt
+patient_report.txt
+
+Client ADK agent
+================
+filesystem_agent
+
+➜  goog-adk git:(mcp-streamhttp) ✗ pip show google-adk
+
+Name: google-adk
+Version: 1.5.0
+Summary: Agent Development Kit
+Home-page: https://google.github.io/adk-docs/
+
+
+ Agent Log On Startup
+
+➜  goog-adk git:(mcp-streamhttp) ✗ adk web
+/Users/binu.b.varghese/.pyenv/versions/3.12.8/lib/python3.12/site-packages/google/adk/cli/fast_api.py:334: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+/Users/binu.b.varghese/.pyenv/versions/3.12.8/lib/python3.12/site-packages/google/adk/auth/credential_service/in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+INFO:     Started server process [90607]
+INFO:     Waiting for application startup.
+
++-----------------------------------------------------------------------------+
+| ADK Web Server started                                                      |
+|                                                                             |
+| For local testing, access at http://localhost:8000.                         |
++-----------------------------------------------------------------------------+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54708 - "GET /dev-ui/?app=filesystem_agent HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54708 - "GET /dev-ui/polyfills-B6TNHZQ6.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /dev-ui/main-JAAWEV7F.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /dev-ui/styles-4VDSPQ37.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /dev-ui/assets/config/runtime-config.json HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /dev-ui/assets/ADK-512-color.svg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /list-apps?relative_path=./ HTTP/1.1" 200 OK
+2025-07-03 11:42:39,738 - INFO - fast_api.py:445 - New session created
+INFO:     127.0.0.1:54709 - "POST /apps/filesystem_agent/users/user/sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54708 - "GET /dev-ui/adk_favicon.svg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54709 - "GET /apps/filesystem_agent/eval_results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54708 - "GET /apps/filesystem_agent/eval_sets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54709 - "GET /apps/filesystem_agent/users/user/sessions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54709 - "GET /apps/filesystem_agent/users/user/sessions HTTP/1.1" 200 OK
+
+
+Query: List files under root directory
+
+
+Server log On Query
+[supergateway] StreamableHttp → Child: {"jsonrpc":"2.0","id":0,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"mcp","version":"0.1.0"}}}
+[supergateway] Child stderr: Secure MCP Filesystem Server running on stdio
+
+[supergateway] Child stderr: Allowed directories: [ '/Users/binu.b.varghese/Downloads/txt' ]
+
+[supergateway] Child → StreamableHttp: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{}},"serverInfo":{"name":"secure-filesystem-server","version":"0.2.0"}},"jsonrpc":"2.0","id":0}
+[supergateway] StreamableHttp → Child: {"jsonrpc":"2.0","method":"notifications/initialized"}
+[supergateway] StreamableHttp → Child: {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+[supergateway] Child stderr: Secure MCP Filesystem Server running on stdio
+
+[supergateway] Child stderr: Allowed directories: [ '/Users/binu.b.varghese/Downloads/txt' ]
+
+[supergateway] Child stderr: Secure MCP Filesystem Server running on stdio
+
+[supergateway] Child stderr: Allowed directories: [ '/Users/binu.b.varghese/Downloads/txt' ]
+
+[supergateway] Child → StreamableHttp: {"result":{"tools":[{"name":"read_file","description":"Read the complete contents of a file from the file system. Handles various text encodings and provides detailed error messages if the file cannot be read. Use this tool when you need to examine the contents of a single file. Use the 'head' parameter to read only the first N lines of a file, or the 'tail' parameter to read only the last N lines of a file. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"tail":{"type":"number","description":"If provided, returns only the last N lines of the file"},"head":{"type":"number","description":"If provided, returns only the first N lines of the file"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"read_multiple_files","description":"Read the contents of multiple files simultaneously. This is more efficient than reading files one by one when you need to analyze or compare multiple files. Each file's content is returned with its path as a reference. Failed reads for individual files won't stop the entire operation. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"paths":{"type":"array","items":{"type":"string"}}},"required":["paths"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"write_file","description":"Create a new file or completely overwrite an existing file with new content. Use with caution as it will overwrite existing files without warning. Handles text content with proper encoding. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"content":{"type":"string"}},"required":["path","content"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"edit_file","description":"Make line-based edits to a text file. Each edit replaces exact line sequences with new content. Returns a git-style diff showing the changes made. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"edits":{"type":"array","items":{"type":"object","properties":{"oldText":{"type":"string","description":"Text to search for - must match exactly"},"newText":{"type":"string","description":"Text to replace with"}},"required":["oldText","newText"],"additionalProperties":false}},"dryRun":{"type":"boolean","default":false,"description":"Preview changes using git-style diff format"}},"required":["path","edits"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"create_directory","description":"Create a new directory or ensure a directory exists. Can create multiple nested directories in one operation. If the directory already exists, this operation will succeed silently. Perfect for setting up directory structures for projects or ensuring required paths exist. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_directory","description":"Get a detailed listing of all files and directories in a specified path. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes. This tool is essential for understanding directory structure and finding specific files within a directory. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_directory_with_sizes","description":"Get a detailed listing of all files and directories in a specified path, including sizes. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes. This tool is useful for understanding directory structure and finding specific files within a directory. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"sortBy":{"type":"string","enum":["name","size"],"default":"name","description":"Sort entries by name or size"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"directory_tree","description":"Get a recursive tree view of files and directories as a JSON structure. Each entry includes 'name', 'type' (file/directory), and 'children' for directories. Files have no children array, while directories always have a children array (which may be empty). The output is formatted with 2-space indentation for readability. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"move_file","description":"Move or rename files and directories. Can move files between directories and rename them in a single operation. If the destination exists, the operation will fail. Works across different directories and can be used for simple renaming within the same directory. Both source and destination must be within allowed directories.","inputSchema":{"type":"object","properties":{"source":{"type":"string"},"destination":{"type":"string"}},"required":["source","destination"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"search_files","description":"Recursively search for files and directories matching a pattern. Searches through all subdirectories from the starting path. The search is case-insensitive and matches partial names. Returns full paths to all matching items. Great for finding files when you don't know their exact location. Only searches within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"pattern":{"type":"string"},"excludePatterns":{"type":"array","items":{"type":"string"},"default":[]}},"required":["path","pattern"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"get_file_info","description":"Retrieve detailed metadata about a file or directory. Returns comprehensive information including size, creation time, last modified time, permissions, and type. This tool is perfect for understanding file characteristics without reading the actual content. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_allowed_directories","description":"Returns the list of directories that this server is allowed to access. Use this to understand which directories are available before trying to access files.","inputSchema":{"type":"object","properties":{},"required":[]}}]},"jsonrpc":"2.0","id":1}
+[supergateway] StreamableHttp → Child: {"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"list_directory","arguments":{"path":"/Users/binu.b.varghese/Downloads/txt"}}}
+[supergateway] Child stderr: Secure MCP Filesystem Server running on stdio
+
+[supergateway] Child stderr: Allowed directories: [ '/Users/binu.b.varghese/Downloads/txt' ]
+
+[supergateway] Child → StreamableHttp: {"result":{"content":[{"type":"text","text":"[FILE] IAM 101 Summary.txt\n[FILE] MortgagePayoffLetter6560NamonWallaceDr.txt\n[FILE] brka-10k.txt\n[FILE] patient_report.txt"}]},"jsonrpc":"2.0","id":2}
+[supergateway] StreamableHttp → Child: {"jsonrpc":"2.0","id":3,"method":"tools/list"}
+[supergateway] Child stderr: Secure MCP Filesystem Server running on stdio
+
+[supergateway] Child stderr: Allowed directories: [ '/Users/binu.b.varghese/Downloads/txt' ]
+
+[supergateway] Child → StreamableHttp: {"result":{"tools":[{"name":"read_file","description":"Read the complete contents of a file from the file system. Handles various text encodings and provides detailed error messages if the file cannot be read. Use this tool when you need to examine the contents of a single file. Use the 'head' parameter to read only the first N lines of a file, or the 'tail' parameter to read only the last N lines of a file. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"tail":{"type":"number","description":"If provided, returns only the last N lines of the file"},"head":{"type":"number","description":"If provided, returns only the first N lines of the file"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"read_multiple_files","description":"Read the contents of multiple files simultaneously. This is more efficient than reading files one by one when you need to analyze or compare multiple files. Each file's content is returned with its path as a reference. Failed reads for individual files won't stop the entire operation. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"paths":{"type":"array","items":{"type":"string"}}},"required":["paths"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"write_file","description":"Create a new file or completely overwrite an existing file with new content. Use with caution as it will overwrite existing files without warning. Handles text content with proper encoding. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"content":{"type":"string"}},"required":["path","content"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"edit_file","description":"Make line-based edits to a text file. Each edit replaces exact line sequences with new content. Returns a git-style diff showing the changes made. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"edits":{"type":"array","items":{"type":"object","properties":{"oldText":{"type":"string","description":"Text to search for - must match exactly"},"newText":{"type":"string","description":"Text to replace with"}},"required":["oldText","newText"],"additionalProperties":false}},"dryRun":{"type":"boolean","default":false,"description":"Preview changes using git-style diff format"}},"required":["path","edits"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"create_directory","description":"Create a new directory or ensure a directory exists. Can create multiple nested directories in one operation. If the directory already exists, this operation will succeed silently. Perfect for setting up directory structures for projects or ensuring required paths exist. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_directory","description":"Get a detailed listing of all files and directories in a specified path. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes. This tool is essential for understanding directory structure and finding specific files within a directory. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_directory_with_sizes","description":"Get a detailed listing of all files and directories in a specified path, including sizes. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes. This tool is useful for understanding directory structure and finding specific files within a directory. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"sortBy":{"type":"string","enum":["name","size"],"default":"name","description":"Sort entries by name or size"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"directory_tree","description":"Get a recursive tree view of files and directories as a JSON structure. Each entry includes 'name', 'type' (file/directory), and 'children' for directories. Files have no children array, while directories always have a children array (which may be empty). The output is formatted with 2-space indentation for readability. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"move_file","description":"Move or rename files and directories. Can move files between directories and rename them in a single operation. If the destination exists, the operation will fail. Works across different directories and can be used for simple renaming within the same directory. Both source and destination must be within allowed directories.","inputSchema":{"type":"object","properties":{"source":{"type":"string"},"destination":{"type":"string"}},"required":["source","destination"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"search_files","description":"Recursively search for files and directories matching a pattern. Searches through all subdirectories from the starting path. The search is case-insensitive and matches partial names. Returns full paths to all matching items. Great for finding files when you don't know their exact location. Only searches within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"},"pattern":{"type":"string"},"excludePatterns":{"type":"array","items":{"type":"string"},"default":[]}},"required":["path","pattern"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"get_file_info","description":"Retrieve detailed metadata about a file or directory. Returns comprehensive information including size, creation time, last modified time, permissions, and type. This tool is perfect for understanding file characteristics without reading the actual content. Only works within allowed directories.","inputSchema":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}},{"name":"list_allowed_directories","description":"Returns the list of directories that this server is allowed to access. Use this to understand which directories are available before trying to access files.","inputSchema":{"type":"object","properties":{},"required":[]}}]},"jsonrpc":"2.0","id":3}
+
+
+Agent Log On Query
+
+INFO:     127.0.0.1:54818 - "POST /run_sse HTTP/1.1" 200 OK
+2025-07-03 11:43:49,244 - INFO - envs.py:47 - Loaded .env file for filesystem_agent at /Users/binu.b.varghese/source/mcp/mcp_sse/supergateway/client/goog-adk/filesystem_agent/.env
+2025-07-03 11:43:49,245 - INFO - envs.py:47 - Loaded .env file for filesystem_agent at /Users/binu.b.varghese/source/mcp/mcp_sse/supergateway/client/goog-adk/filesystem_agent/.env
+2025-07-03 11:43:49,348 - INFO - agent_loader.py:95 - Found root_agent in filesystem_agent.agent
+2025-07-03 11:43:52,987 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/mcp "HTTP/1.1 200 OK"
+2025-07-03 11:43:52,988 - INFO - streamable_http.py:146 - Negotiated protocol version: 2025-06-18
+2025-07-03 11:43:52,995 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/mcp "HTTP/1.1 202 Accepted"
+2025-07-03 11:43:55,290 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/mcp "HTTP/1.1 200 OK"
+/Users/binu.b.varghese/.pyenv/versions/3.12.8/lib/python3.12/site-packages/google/adk/tools/mcp_tool/mcp_tool.py:85: UserWarning: [EXPERIMENTAL] BaseAuthenticatedTool: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__(
+2025-07-03 11:43:55,303 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,303 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,303 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,303 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,304 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,305 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,305 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:43:55,356 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-03 11:43:55,356 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+You are a helpful assistant for managing files.
+    You can list files in directories and read the content of files.
+
+    IMPORTANT CONSTRAINT: You are ONLY allowed to access files and directories
+    within the following ABSOLUTE path: '/Users/binu.b.varghese/Downloads/txt'.
+    You MUST NOT attempt to access any paths outside of this specific directory.
+
+    When the user asks to list a directory or read a file:
+    - If they provide a relative path (e.g., ".", "folder/subfolder", "file.txt"),
+      you MUST prepend '/Users/binu.b.varghese/Downloads/txt/' to it to form an absolute path
+      before calling any tool. For example, if the user asks for ".",
+      the path for the tool should be '/Users/binu.b.varghese/Downloads/txt'.
+    - If they provide an absolute path, you MUST ensure it starts with '/Users/binu.b.varghese/Downloads/txt'
+      and is entirely contained within this allowed directory. If it's not, you MUST
+      inform the user that access is denied for security reasons.
+    - If the user asks for the "root directory" or "main directory", assume they mean '/Users/binu.b.varghese/Downloads/txt'.
+
+
+You are an agent. Your internal name is "filesystem_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List files under root directory"}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'tail': {'description': 'If provided, returns only the last N lines of the file', 'type': <Type.NUMBER: 'NUMBER'>}, 'head': {'description': 'If provided, returns only the first N lines of the file', 'type': <Type.NUMBER: 'NUMBER'>}}
+read_multiple_files: {'paths': {'items': {'type': <Type.STRING: 'STRING'>}, 'type': <Type.ARRAY: 'ARRAY'>}}
+write_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'content': {'type': <Type.STRING: 'STRING'>}}
+edit_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'edits': {'items': {'properties': {'oldText': {'description': 'Text to search for - must match exactly', 'type': <Type.STRING: 'STRING'>}, 'newText': {'description': 'Text to replace with', 'type': <Type.STRING: 'STRING'>}}, 'required': ['oldText', 'newText'], 'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, 'dryRun': {'default': False, 'description': 'Preview changes using git-style diff format', 'type': <Type.BOOLEAN: 'BOOLEAN'>}}
+create_directory: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_directory: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_directory_with_sizes: {'path': {'type': <Type.STRING: 'STRING'>}, 'sortBy': {'default': 'name', 'description': 'Sort entries by name or size', 'enum': ['name', 'size'], 'type': <Type.STRING: 'STRING'>}}
+directory_tree: {'path': {'type': <Type.STRING: 'STRING'>}}
+move_file: {'source': {'type': <Type.STRING: 'STRING'>}, 'destination': {'type': <Type.STRING: 'STRING'>}}
+search_files: {'path': {'type': <Type.STRING: 'STRING'>}, 'pattern': {'type': <Type.STRING: 'STRING'>}, 'excludePatterns': {'default': [], 'items': {'type': <Type.STRING: 'STRING'>}, 'type': <Type.ARRAY: 'ARRAY'>}}
+get_file_info: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_allowed_directories: {}
+-----------------------------------------------------------
+
+2025-07-03 11:43:55,356 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-03 11:43:56,256 - WARNING - types.py:5158 - Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-07-03 11:43:56,257 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+None
+-----------------------------------------------------------
+Function calls:
+name: list_directory, args: {'path': '/Users/binu.b.varghese/Downloads/txt'}
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Thu, 03 Jul 2025 15:43:56 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=653","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"function_call":{"args":{"path":"/Users/binu.b.varghese/Downloads/txt"},"name":"list_directory"}}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.00001900207931420913}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":19,"candidates_tokens_details":[{"modality":"TEXT","token_count":19}],"prompt_token_count":1140,"prompt_tokens_details":[{"modality":"TEXT","token_count":1140}],"total_token_count":1159},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-03 11:43:56,258 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionCall":{"id":"adk-05adfd96-962b-44d0-a5c2-3a23277aeba8","args":{"path":"/Users/binu.b.varghese/Downloads/txt"},"name":"list_directory"}}],"role":"model"},"usageMetadata":{"candidatesTokenCount":19,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":19}],"promptTokenCount":1140,"promptTokensDetails":[{"modality":"TEXT","tokenCount":1140}],"totalTokenCount":1159},"invocationId":"e-a0e5eb0b-a23e-4fec-9b30-f15212e700b1","author":"filesystem_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"longRunningToolIds":[],"id":"seNUjp3I","timestamp":1751557435.309186}
+2025-07-03 11:43:58,325 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/mcp "HTTP/1.1 200 OK"
+2025-07-03 11:43:58,326 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionResponse":{"id":"adk-05adfd96-962b-44d0-a5c2-3a23277aeba8","name":"list_directory","response":{"result":{"content":[{"type":"text","text":"[FILE] IAM 101 Summary.txt\n[FILE] MortgagePayoffLetter6560NamonWallaceDr.txt\n[FILE] brka-10k.txt\n[FILE] patient_report.txt"}],"isError":false}}}}],"role":"user"},"invocationId":"e-a0e5eb0b-a23e-4fec-9b30-f15212e700b1","author":"filesystem_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"xv3qb4R3","timestamp":1751557438.326316}
+2025-07-03 11:44:00,538 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8001/mcp "HTTP/1.1 200 OK"
+2025-07-03 11:44:00,539 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,539 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,540 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,540 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,540 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,540 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,541 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,541 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,541 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,541 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,542 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,542 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-03 11:44:00,597 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-03 11:44:00,598 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+You are a helpful assistant for managing files.
+    You can list files in directories and read the content of files.
+
+    IMPORTANT CONSTRAINT: You are ONLY allowed to access files and directories
+    within the following ABSOLUTE path: '/Users/binu.b.varghese/Downloads/txt'.
+    You MUST NOT attempt to access any paths outside of this specific directory.
+
+    When the user asks to list a directory or read a file:
+    - If they provide a relative path (e.g., ".", "folder/subfolder", "file.txt"),
+      you MUST prepend '/Users/binu.b.varghese/Downloads/txt/' to it to form an absolute path
+      before calling any tool. For example, if the user asks for ".",
+      the path for the tool should be '/Users/binu.b.varghese/Downloads/txt'.
+    - If they provide an absolute path, you MUST ensure it starts with '/Users/binu.b.varghese/Downloads/txt'
+      and is entirely contained within this allowed directory. If it's not, you MUST
+      inform the user that access is denied for security reasons.
+    - If the user asks for the "root directory" or "main directory", assume they mean '/Users/binu.b.varghese/Downloads/txt'.
+
+
+You are an agent. Your internal name is "filesystem_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List files under root directory"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"path":"/Users/binu.b.varghese/Downloads/txt"},"name":"list_directory"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"list_directory","response":{"result":{"content":[{"type":"text","text":"[FILE] IAM 101 Summary.txt\n[FILE] MortgagePayoffLetter6560NamonWallaceDr.txt\n[FILE] brka-10k.txt\n[FILE] patient_report.txt"}],"isError":false}}}}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'tail': {'description': 'If provided, returns only the last N lines of the file', 'type': <Type.NUMBER: 'NUMBER'>}, 'head': {'description': 'If provided, returns only the first N lines of the file', 'type': <Type.NUMBER: 'NUMBER'>}}
+read_multiple_files: {'paths': {'items': {'type': <Type.STRING: 'STRING'>}, 'type': <Type.ARRAY: 'ARRAY'>}}
+write_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'content': {'type': <Type.STRING: 'STRING'>}}
+edit_file: {'path': {'type': <Type.STRING: 'STRING'>}, 'edits': {'items': {'properties': {'oldText': {'description': 'Text to search for - must match exactly', 'type': <Type.STRING: 'STRING'>}, 'newText': {'description': 'Text to replace with', 'type': <Type.STRING: 'STRING'>}}, 'required': ['oldText', 'newText'], 'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, 'dryRun': {'default': False, 'description': 'Preview changes using git-style diff format', 'type': <Type.BOOLEAN: 'BOOLEAN'>}}
+create_directory: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_directory: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_directory_with_sizes: {'path': {'type': <Type.STRING: 'STRING'>}, 'sortBy': {'default': 'name', 'description': 'Sort entries by name or size', 'enum': ['name', 'size'], 'type': <Type.STRING: 'STRING'>}}
+directory_tree: {'path': {'type': <Type.STRING: 'STRING'>}}
+move_file: {'source': {'type': <Type.STRING: 'STRING'>}, 'destination': {'type': <Type.STRING: 'STRING'>}}
+search_files: {'path': {'type': <Type.STRING: 'STRING'>}, 'pattern': {'type': <Type.STRING: 'STRING'>}, 'excludePatterns': {'default': [], 'items': {'type': <Type.STRING: 'STRING'>}, 'type': <Type.ARRAY: 'ARRAY'>}}
+get_file_info: {'path': {'type': <Type.STRING: 'STRING'>}}
+list_allowed_directories: {}
+-----------------------------------------------------------
+
+2025-07-03 11:44:00,598 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-03 11:44:01,748 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+The root directory contains the following files: 'IAM 101 Summary.txt', 'MortgagePayoffLetter6560NamonWallaceDr.txt', 'brka-10k.txt', and 'patient_report.txt'.
+
+-----------------------------------------------------------
+Function calls:
+
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Thu, 03 Jul 2025 15:44:01 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=962","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"text":"The root directory contains the following files: 'IAM 101 Summary.txt', 'MortgagePayoffLetter6560NamonWallaceDr.txt', 'brka-10k.txt', and 'patient_report.txt'.\n"}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.033789067898156507}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":53,"candidates_tokens_details":[{"modality":"TEXT","token_count":53}],"prompt_token_count":1219,"prompt_tokens_details":[{"modality":"TEXT","token_count":1219}],"total_token_count":1272},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-03 11:44:01,749 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"text":"The root directory contains the following files: 'IAM 101 Summary.txt', 'MortgagePayoffLetter6560NamonWallaceDr.txt', 'brka-10k.txt', and 'patient_report.txt'.\n"}],"role":"model"},"usageMetadata":{"candidatesTokenCount":53,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":53}],"promptTokenCount":1219,"promptTokensDetails":[{"modality":"TEXT","tokenCount":1219}],"totalTokenCount":1272},"invocationId":"e-a0e5eb0b-a23e-4fec-9b30-f15212e700b1","author":"filesystem_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"KwW8Rfc6","timestamp":1751557440.545687}
+INFO:     127.0.0.1:54818 - "GET /apps/filesystem_agent/users/user/sessions/281fcce6-182f-471c-810c-295db2ac71a5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54853 - "GET /debug/trace/session/281fcce6-182f-471c-810c-295db2ac71a5 HTTP/1.1" 200 OK
