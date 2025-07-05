@@ -1,0 +1,90 @@
+# https://github.com/openai/openai-agents-python/blob/main/examples/mcp/streamablehttp_example/server.py
+
+cd ~/source/mcp/mcp_sse/supergateway/client
+
+➜  client  uv init openai-agents-client
+➜  client  cd openai-agents-client
+➜  openai-agents-client git:(supergateway) ✗ python -m venv .venv
+source .venv/bin/activate
+(.venv) ➜  openai-agents-client
+
+➜  openai-agents-client uv add openai-agents
+touch .env
+touch sample-server.py
+touch sample-agent.py
+
+
+Run sampel MCP server
+(.venv) ➜  openai-agents-client git:(supergateway) ✗ uv run sample-server.py
+INFO:     Started server process [15371]
+INFO:     Waiting for application startup.
+StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+
+
+(.venv) ➜  openai-agents-client git:(supergateway) ✗ uv run sample-agent.py
+Starting Streamable HTTP server at http://localhost:8000/mcp ...
+error: Failed to spawn: `/Users/binu.b.varghese/source/mcp/mcp_sse/supergateway/client/openai-agents-client/server.py`
+  Caused by: No such file or directory (os error 2)
+Streamable HTTP server started. Running example...
+
+
+View trace: https://platform.openai.com/traces/trace?trace_id=trace_27b32d0fb8df44a79e15d57952ed098c
+
+Running: Add these numbers: 7 and 22.
+The sum of 7 and 22 is 29.
+
+
+Running: What's the weather in Tokyo?
+The weather in Tokyo is currently clear with a temperature of 82°F (28°C). The wind is blowing from the north-northeast at 12 mph. The forecast for later today includes sunny weather, with no expected precipitation.
+
+
+Running: What's the secret word?
+The secret word is "cherry."
+
+
+Server Log
+
+INFO:     127.0.0.1:61677 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: ad18a1e190c8423e9eca033d3a327f3f
+INFO:     127.0.0.1:61677 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61681 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61682 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61681 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:61682 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61684 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61684 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61701 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61701 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+[debug-server] add(7, 22)
+INFO:     127.0.0.1:61703 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61703 - "POST /mcp/ HTTP/1.1" 200 OK
+
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61709 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61709 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61711 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61711 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+[debug-server] get_current_weather(Tokyo)
+INFO:     127.0.0.1:61718 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61718 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61726 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61726 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61728 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61728 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+[debug-server] get_secret_word()
+INFO:     127.0.0.1:61730 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:61730 - "POST /mcp/ HTTP/1.1" 200 OK
+
+Processing request of type ListToolsRequest
+INFO:     127.0.0.1:61734 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: ad18a1e190c8423e9eca033d3a327f3f
+INFO:     127.0.0.1:61734 - "DELETE /mcp/ HTTP/1.1" 200 OK
