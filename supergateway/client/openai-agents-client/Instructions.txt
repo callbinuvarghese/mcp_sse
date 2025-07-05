@@ -1,0 +1,38 @@
+# https://github.com/openai/openai-agents-python/blob/main/examples/mcp/streamablehttp_example/server.py
+
+See a sample MCP server and MCP Agent Client based on openai at sample-agent-instructions.txt
+
+Run Server 
+------------
+(.venv) ➜  supergateway git:(supergateway) ✗ cd server_supergateway
+(.venv) ➜  server_supergateway git:(supergateway) ✗ ls
+server.sh
+
+(.venv) ➜  server_supergateway git:(supergateway) ✗ ./server.sh
+[supergateway] Starting...
+[supergateway] Supergateway is supported by Supermachine (hosted MCPs) - https://supermachine.ai
+[supergateway]   - outputTransport: streamableHttp
+[supergateway] Running stateless server
+[supergateway]   - Headers: (none)
+[supergateway]   - port: 8001
+[supergateway]   - stdio: npx -y @modelcontextprotocol/server-filesystem ~/Downloads/txt
+[supergateway]   - streamableHttpPath: /mcp
+[supergateway]   - CORS: disabled
+[supergateway]   - Health endpoints: (none)
+[supergateway] Listening on port 8001
+[supergateway] StreamableHttp endpoint: http://localhost:8001/mcp
+
+
+Run openai agent client with the MCP tool CallToolRequest
+
+(.venv) ➜  openai-agents-client git:(supergateway) ✗ uv run agent.py
+View trace: https://platform.openai.com/traces/trace?trace_id=trace_e823d939a8e24beb98b7980e0d071b99
+
+Running: List files in the current directory.
+Here are the files in the current directory:
+
+- IAM 101 Summary.txt
+- MortgagePayoffLetter6560NamonWallaceDr.txt
+- brka-10k.txt
+- patient_report.txt
+(.venv) ➜  openai-agents-client git:(supergateway) ✗
