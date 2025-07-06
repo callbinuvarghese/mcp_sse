@@ -10,7 +10,7 @@ from server import mcp
 import tools.csv_tools
 import tools.parquet_tools
 import tools.research_tools
-
+import tools.sqllite_explorer
 
 def create_starlette_app(
         mcp_server: Server,

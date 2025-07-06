@@ -1,0 +1,708 @@
+1. Run agent using ADK
+
+server
+--------
+(.venv) ➜  server git:(mcp-streamhttp) ✗ pwd
+/Users/binu.b.varghese/source/mcp/mcp_sse/streamhttp/server
+
+(.venv) ➜  server git:(mcp-streamhttp) ✗ PYTHONPATH=. uv run run.py
+
+SQLiteExplorer tools Using database path: data/sqlite.db
+2025-07-05 13:03:10.087 | DEBUG    | tools.sqlite_explorer:<module>:19 - Using database path: data/sqlite.db
+2025-07-05 13:03:10.138 | INFO     | __main__:<module>:18 - MCP Streamable HTTP server is starting...
+WARNING:  ASGI app factory detected. Using it, but please consider setting the --factory flag explicitly.
+INFO:     Started server process [22311]
+INFO:     Waiting for application startup.
+StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:8123 (Press CTRL+C to quit)
+INFO:     ::1:59044 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: 69b8e49307cb4fb8bb56ed766a4bf5b2
+INFO:     ::1:59044 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59045 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59046 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59045 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59046 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59047 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59047 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59060 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: 69b8e49307cb4fb8bb56ed766a4bf5b2
+INFO:     ::1:59060 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59565 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: 720101a1805b4cf8b3fd3706474e2353
+INFO:     ::1:59565 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59566 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59567 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59566 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59567 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59568 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59568 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59571 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59571 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:40:10.880 | DEBUG    | tools.sqlite_explorer:list_tables:106 - Listing all tables in the database
+2025-07-05 14:40:10.893 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:40:10.894 | DEBUG    | tools.sqlite_explorer:list_tables:120 - Tables found: ['orders', 'products', 'sqlite_sequence', 'users']
+2025-07-05 14:40:10.895 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59572 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59572 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59599 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: 720101a1805b4cf8b3fd3706474e2353
+INFO:     ::1:59599 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59600 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: b91b779338524d3ca0b573d0473f8f38
+INFO:     ::1:59600 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59601 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59602 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59601 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59602 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59603 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59603 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59605 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59605 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:40:29.985 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT * FROM orders with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:40:29.985 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT * FROM orders
+2025-07-05 14:40:29.989 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:40:29.989 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x1090ddc60>
+2025-07-05 14:40:29.989 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT * FROM orders LIMIT 1000
+2025-07-05 14:40:29.990 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 4 rows
+2025-07-05 14:40:29.990 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59606 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59606 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59631 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: b91b779338524d3ca0b573d0473f8f38
+INFO:     ::1:59631 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59632 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: 226b4bcbf8534bbf9218e9034c094158
+INFO:     ::1:59632 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59633 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59634 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59633 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59634 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59635 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59635 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59637 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59637 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:40:44.826 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT * FROM users with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:40:44.827 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT * FROM users
+2025-07-05 14:40:44.833 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:40:44.834 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x1090dd990>
+2025-07-05 14:40:44.834 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT * FROM users LIMIT 1000
+2025-07-05 14:40:44.834 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 3 rows
+2025-07-05 14:40:44.834 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59638 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59638 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59669 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: 226b4bcbf8534bbf9218e9034c094158
+INFO:     ::1:59669 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59670 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: 8db8087d59074d7a9767310f5a1c534f
+INFO:     ::1:59670 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59671 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59672 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59671 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59672 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59673 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59673 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59675 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59675 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:41:10.013 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT COUNT(*) FROM orders with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:41:10.013 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT COUNT(*) FROM orders
+2025-07-05 14:41:10.031 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:41:10.031 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x1090de6b0>
+2025-07-05 14:41:10.031 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT COUNT(*) FROM orders LIMIT 1000
+2025-07-05 14:41:10.032 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 1 rows
+2025-07-05 14:41:10.032 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59676 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59676 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:41:10.045 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT COUNT(*) FROM products with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:41:10.045 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT COUNT(*) FROM products
+2025-07-05 14:41:10.046 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:41:10.046 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x10902f100>
+2025-07-05 14:41:10.047 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT COUNT(*) FROM products LIMIT 1000
+2025-07-05 14:41:10.047 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 1 rows
+2025-07-05 14:41:10.047 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59677 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59677 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:41:10.059 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT COUNT(*) FROM users with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:41:10.059 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT COUNT(*) FROM users
+2025-07-05 14:41:10.060 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:41:10.060 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x10902ff10>
+2025-07-05 14:41:10.061 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT COUNT(*) FROM users LIMIT 1000
+2025-07-05 14:41:10.061 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 1 rows
+2025-07-05 14:41:10.061 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59678 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59678 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59725 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: 8db8087d59074d7a9767310f5a1c534f
+INFO:     ::1:59725 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59726 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: a8d9d6ecc29d41648976b304680834e8
+INFO:     ::1:59726 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59727 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59728 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59727 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59728 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59729 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59729 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59788 - "DELETE /mcp HTTP/1.1" 307 Temporary Redirect
+Terminating session: a8d9d6ecc29d41648976b304680834e8
+INFO:     ::1:59788 - "DELETE /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59789 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+Created new transport with session ID: bda0938b31764ffbba0350e1e434c894
+INFO:     ::1:59789 - "POST /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59790 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59791 - "GET /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59790 - "POST /mcp/ HTTP/1.1" 202 Accepted
+INFO:     ::1:59791 - "GET /mcp/ HTTP/1.1" 200 OK
+INFO:     ::1:59792 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59792 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+INFO:     ::1:59794 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59794 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type CallToolRequest
+2025-07-05 14:42:11.044 | DEBUG    | tools.sqlite_explorer:read_query:69 - Executing query: SELECT * FROM orders ORDER BY order_date ASC LIMIT 1 with params: None (fetch_all=True, row_limit=1000)
+2025-07-05 14:42:11.044 | DEBUG    | tools.sqlite_explorer:read_query:81 - Processed query: SELECT * FROM orders ORDER BY order_date ASC LIMIT 1
+2025-07-05 14:42:11.046 | DEBUG    | tools.sqlite_explorer:__enter__:30 - Opened SQLite connection to: data/sqlite.db
+2025-07-05 14:42:11.046 | DEBUG    | tools.sqlite_explorer:read_query:84 - Using database connection: <sqlite3.Connection object at 0x10902fe20>
+2025-07-05 14:42:11.046 | DEBUG    | tools.sqlite_explorer:read_query:89 - Final SQL: SELECT * FROM orders ORDER BY order_date ASC LIMIT 1
+2025-07-05 14:42:11.047 | DEBUG    | tools.sqlite_explorer:read_query:92 - Fetched 1 rows
+2025-07-05 14:42:11.047 | DEBUG    | tools.sqlite_explorer:__exit__:36 - Closed SQLite connection
+INFO:     ::1:59795 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
+INFO:     ::1:59795 - "POST /mcp/ HTTP/1.1" 200 OK
+Processing request of type ListToolsRequest
+
+Client Agent ADK Web
+--------------
+
+(.venv) ➜  goog-adk-client git:(mcp-streamhttp) ✗ uv run adk web
+
+http://localhost:8000/dev-ui/?app=sqlite-agent
+
+-----------------------------------------------------------
+
+2025-07-05 14:41:10,005 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionCall":{"id":"adk-ed412d39-3ef3-4430-995a-7383b6f4f598","args":{"query":"SELECT COUNT(*) FROM orders"},"name":"read_query"}},{"functionCall":{"id":"adk-7aaa70da-f2f0-4767-9262-a56ad7ce9ae4","args":{"query":"SELECT COUNT(*) FROM products"},"name":"read_query"}},{"functionCall":{"id":"adk-cc62173e-9d95-4712-9d91-233d58aab1e9","args":{"query":"SELECT COUNT(*) FROM users"},"name":"read_query"}}],"role":"model"},"usageMetadata":{"candidatesTokenCount":27,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":27}],"promptTokenCount":1967,"promptTokensDetails":[{"modality":"TEXT","tokenCount":1967}],"totalTokenCount":1994},"invocationId":"e-4a63e76d-a08c-41ae-8c48-46553247a851","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"longRunningToolIds":[],"id":"eaK5odS4","timestamp":1751740868.90385}
+2025-07-05 14:41:10,010 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:10,012 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:10,042 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:10,044 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:10,056 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:10,059 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:10,068 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionResponse":{"id":"adk-ed412d39-3ef3-4430-995a-7383b6f4f598","name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 4\n}"}],"structuredContent":{"result":[{"COUNT(*)":4}]},"isError":false}}}},{"functionResponse":{"id":"adk-7aaa70da-f2f0-4767-9262-a56ad7ce9ae4","name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}},{"functionResponse":{"id":"adk-cc62173e-9d95-4712-9d91-233d58aab1e9","name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}}],"role":"user"},"invocationId":"VvO9BSUF","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"R96qEZdm","timestamp":1751740870.039236}
+2025-07-05 14:41:10,075 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:10,077 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:10,079 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:10,080 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:10,080 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:10,080 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:10,081 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:10,115 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-05 14:41:10,116 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+
+    Role: You are an intelligent SQLite Database Assistant. Your primary goal is to help users explore and retrieve information from a SQLite database using the provided tools.
+
+    Available Tools:
+    You have access to the following tools to interact with the database:
+
+      list_tables(): To get a list of all available tables in the database.
+      describe_table(table_name: str): To retrieve the schema (column names, types, etc.) for a specific table.
+      read_query(query: str, params: Optional[List[Any]] = None, fetch_all: bool = True, row_limit: int = 1000): To execute a SELECT or WITH SQL query and retrieve data.
+
+    General Guidelines:
+
+    Understand the User's Goal: Before executing any tool, try to understand what information the user is trying to find.
+
+    Tool Selection Flow:
+
+      To find out what data is available: Start by calling list_tables() to get a list of all tables.
+      To understand a table's structure: After listing tables, use describe_table(table_name="your_table_name") for any table the user is interested in or that seems relevant.
+      To retrieve data: Use read_query(query="SQL_QUERY_STRING") to fetch data.
+
+    SQL Query Best Practices for read_query:
+
+      Read-Only: The read_query tool is strictly for SELECT or WITH statements. You MUST NOT attempt to execute INSERT, UPDATE, DELETE, CREATE, DROP, or any other data modification or DDL (Data Definition Language) queries.
+      Single Statement: Only one SQL statement is allowed per read_query call. Do not include semicolons (;) within the query if they separate multiple statements.
+      Row Limit: The read_query tool has a default row_limit of 1000. If the user asks for "all" data or a large dataset, consider mentioning this limit or asking if they want to override it.
+      Parameters: If the user provides values for filtering (e.g., WHERE name = 'Alice'), use parameterized queries with the params argument to prevent SQL injection. For example: read_query(query="SELECT * FROM users WHERE name = ?", params=["Alice"]).
+      Error Handling: If a query fails (e.g., table not found, invalid SQL syntax), inform the user about the error message returned by the tool.
+
+    User Interaction:
+
+      Always acknowledge the user's request.
+      If you need more information (e.g., which table to describe, what data to filter by), ask clarifying questions.
+      Present the results from the tools in a clear and readable format.
+      If a tool call results in an error, explain what happened to the user.
+
+    Example Conversation Flow:
+
+      User: "What tables are in the database?"
+      Agent (calls list_tables()): "The tables available are: users, products, orders."
+      User: "Can you show me the schema for the users table?"
+      Agent (calls describe_table(table_name="users")): "The users table has the following columns: id (INTEGER, PK), name (TEXT), email (TEXT), created_at (TEXT)."
+      User: "Show me the first 5 users."
+      Agent (calls read_query(query="SELECT * FROM users LIMIT 5")): "Here are the first 5 users: [list of user data]"
+
+    By following these instructions, you will be able to effectively assist users in exploring their SQLite database.
+
+
+You are an agent. Your internal name is "sqlite_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{},"name":"list_tables"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"list_tables","response":{"result":{"content":[{"type":"text","text":"orders"},{"type":"text","text":"products"},{"type":"text","text":"sqlite_sequence"},{"type":"text","text":"users"}],"structuredContent":{"result":["orders","products","sqlite_sequence","users"]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. The tables in the database are: orders, products, sqlite_sequence, and users.\n"}],"role":"model"}
+{"parts":[{"text":"select records from orders"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-25\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"user_id\": 2,\n  \"product_id\": 2,\n  \"quantity\": 2,\n  \"order_date\": \"2025-06-24\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"user_id\": 3,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-23\"\n}"},{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":1,"user_id":1,"product_id":1,"quantity":1,"order_date":"2025-06-25"},{"id":2,"user_id":2,"product_id":2,"quantity":2,"order_date":"2025-06-24"},{"id":3,"user_id":3,"product_id":3,"quantity":1,"order_date":"2025-06-23"},{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the orders table. Here are the results:\n\nid: 1, user_id: 1, product_id: 1, quantity: 1, order_date: 2025-06-25\nid: 2, user_id: 2, product_id: 2, quantity: 2, order_date: 2025-06-24\nid: 3, user_id: 3, product_id: 3, quantity: 1, order_date: 2025-06-23\nid: 4, user_id: 1, product_id: 3, quantity: 1, order_date: 2025-06-22\n"}],"role":"model"}
+{"parts":[{"text":"list users"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"name\": \"Bob Smith\",\n  \"email\": \"bob@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"name\": \"Charlie Lee\",\n  \"email\": \"charlie@example.com\"\n}"}],"structuredContent":{"result":[{"id":1,"name":"Alice Johnson","email":"alice@example.com"},{"id":2,"name":"Bob Smith","email":"bob@example.com"},{"id":3,"name":"Charlie Lee","email":"charlie@example.com"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the users table. Here are the results:\n\nid: 1, name: Alice Johnson, email: alice@example.com\nid: 2, name: Bob Smith, email: bob@example.com\nid: 3, name: Charlie Lee, email: charlie@example.com\n"}],"role":"model"}
+{"parts":[{"text":"How many records are present in each of the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT COUNT(*) FROM orders"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM products"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 4\n}"}],"structuredContent":{"result":[{"COUNT(*)":4}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_query: {'query': {'title': 'Query', 'type': <Type.STRING: 'STRING'>}, 'params': {'any_of': [{'items': {'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, {'nullable': True, 'type': <Type.OBJECT: 'OBJECT'>}], 'title': 'Params'}, 'fetch_all': {'default': True, 'title': 'Fetch All', 'type': <Type.BOOLEAN: 'BOOLEAN'>}, 'row_limit': {'default': 1000, 'title': 'Row Limit', 'type': <Type.INTEGER: 'INTEGER'>}}
+list_tables: {}
+describe_table: {'table_name': {'title': 'Table Name', 'type': <Type.STRING: 'STRING'>}}
+get_alerts: {'state': {'title': 'State', 'type': <Type.STRING: 'STRING'>}}
+get_forecast: {'latitude': {'title': 'Latitude', 'type': <Type.NUMBER: 'NUMBER'>}, 'longitude': {'title': 'Longitude', 'type': <Type.NUMBER: 'NUMBER'>}}
+-----------------------------------------------------------
+
+2025-07-05 14:41:10,117 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-05 14:41:10,991 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+OK. Here's the number of records in each table:
+
+*   **orders:** 4 records
+*   **products:** 3 records
+*   **users:** 3 records
+
+-----------------------------------------------------------
+Function calls:
+
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Sat, 05 Jul 2025 18:41:11 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=724","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"text":"OK. Here's the number of records in each table:\n\n*   **orders:** 4 records\n*   **products:** 3 records\n*   **users:** 3 records\n"}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.00794237634030784}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":41,"candidates_tokens_details":[{"modality":"TEXT","token_count":41}],"prompt_token_count":2075,"prompt_tokens_details":[{"modality":"TEXT","token_count":2075}],"total_token_count":2116},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-05 14:41:10,992 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"text":"OK. Here's the number of records in each table:\n\n*   **orders:** 4 records\n*   **products:** 3 records\n*   **users:** 3 records\n"}],"role":"model"},"usageMetadata":{"candidatesTokenCount":41,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":41}],"promptTokenCount":2075,"promptTokensDetails":[{"modality":"TEXT","tokenCount":2075}],"totalTokenCount":2116},"invocationId":"e-4a63e76d-a08c-41ae-8c48-46553247a851","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"ZYRl3gVX","timestamp":1751740870.083274}
+INFO:     127.0.0.1:59668 - "GET /apps/sqlite-agent/users/user/sessions/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59685 - "GET /debug/trace/session/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59724 - "POST /run_sse HTTP/1.1" 200 OK
+2025-07-05 14:41:35,441 - INFO - envs.py:47 - Loaded .env file for sqlite-agent at /Users/binu.b.varghese/source/mcp/mcp_sse/streamhttp/client/goog-adk-client/sqlite-agent/.env
+2025-07-05 14:41:35,445 - INFO - mcp_session_manager.py:289 - Cleaning up disconnected session: session_no_headers
+2025-07-05 14:41:35,450 - INFO - _client.py:1740 - HTTP Request: DELETE http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:35,453 - INFO - _client.py:1740 - HTTP Request: DELETE http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:35,454 - WARNING - mcp_session_manager.py:293 - Error during disconnected session cleanup: Attempted to exit cancel scope in a different task than it was entered in
+2025-07-05 14:41:35,470 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:35,483 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:35,483 - INFO - streamable_http.py:134 - Received session ID: a8d9d6ecc29d41648976b304680834e8
+2025-07-05 14:41:35,483 - INFO - streamable_http.py:146 - Negotiated protocol version: 2025-06-18
+2025-07-05 14:41:35,488 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:35,488 - INFO - _client.py:1740 - HTTP Request: GET http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:35,490 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 202 Accepted"
+2025-07-05 14:41:35,492 - INFO - _client.py:1740 - HTTP Request: GET http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:35,495 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:41:35,498 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:41:35,500 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:35,500 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:35,501 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:35,501 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:35,501 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:41:35,552 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-05 14:41:35,552 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+
+    Role: You are an intelligent SQLite Database Assistant. Your primary goal is to help users explore and retrieve information from a SQLite database using the provided tools.
+
+    Available Tools:
+    You have access to the following tools to interact with the database:
+
+      list_tables(): To get a list of all available tables in the database.
+      describe_table(table_name: str): To retrieve the schema (column names, types, etc.) for a specific table.
+      read_query(query: str, params: Optional[List[Any]] = None, fetch_all: bool = True, row_limit: int = 1000): To execute a SELECT or WITH SQL query and retrieve data.
+
+    General Guidelines:
+
+    Understand the User's Goal: Before executing any tool, try to understand what information the user is trying to find.
+
+    Tool Selection Flow:
+
+      To find out what data is available: Start by calling list_tables() to get a list of all tables.
+      To understand a table's structure: After listing tables, use describe_table(table_name="your_table_name") for any table the user is interested in or that seems relevant.
+      To retrieve data: Use read_query(query="SQL_QUERY_STRING") to fetch data.
+
+    SQL Query Best Practices for read_query:
+
+      Read-Only: The read_query tool is strictly for SELECT or WITH statements. You MUST NOT attempt to execute INSERT, UPDATE, DELETE, CREATE, DROP, or any other data modification or DDL (Data Definition Language) queries.
+      Single Statement: Only one SQL statement is allowed per read_query call. Do not include semicolons (;) within the query if they separate multiple statements.
+      Row Limit: The read_query tool has a default row_limit of 1000. If the user asks for "all" data or a large dataset, consider mentioning this limit or asking if they want to override it.
+      Parameters: If the user provides values for filtering (e.g., WHERE name = 'Alice'), use parameterized queries with the params argument to prevent SQL injection. For example: read_query(query="SELECT * FROM users WHERE name = ?", params=["Alice"]).
+      Error Handling: If a query fails (e.g., table not found, invalid SQL syntax), inform the user about the error message returned by the tool.
+
+    User Interaction:
+
+      Always acknowledge the user's request.
+      If you need more information (e.g., which table to describe, what data to filter by), ask clarifying questions.
+      Present the results from the tools in a clear and readable format.
+      If a tool call results in an error, explain what happened to the user.
+
+    Example Conversation Flow:
+
+      User: "What tables are in the database?"
+      Agent (calls list_tables()): "The tables available are: users, products, orders."
+      User: "Can you show me the schema for the users table?"
+      Agent (calls describe_table(table_name="users")): "The users table has the following columns: id (INTEGER, PK), name (TEXT), email (TEXT), created_at (TEXT)."
+      User: "Show me the first 5 users."
+      Agent (calls read_query(query="SELECT * FROM users LIMIT 5")): "Here are the first 5 users: [list of user data]"
+
+    By following these instructions, you will be able to effectively assist users in exploring their SQLite database.
+
+
+You are an agent. Your internal name is "sqlite_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{},"name":"list_tables"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"list_tables","response":{"result":{"content":[{"type":"text","text":"orders"},{"type":"text","text":"products"},{"type":"text","text":"sqlite_sequence"},{"type":"text","text":"users"}],"structuredContent":{"result":["orders","products","sqlite_sequence","users"]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. The tables in the database are: orders, products, sqlite_sequence, and users.\n"}],"role":"model"}
+{"parts":[{"text":"select records from orders"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-25\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"user_id\": 2,\n  \"product_id\": 2,\n  \"quantity\": 2,\n  \"order_date\": \"2025-06-24\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"user_id\": 3,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-23\"\n}"},{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":1,"user_id":1,"product_id":1,"quantity":1,"order_date":"2025-06-25"},{"id":2,"user_id":2,"product_id":2,"quantity":2,"order_date":"2025-06-24"},{"id":3,"user_id":3,"product_id":3,"quantity":1,"order_date":"2025-06-23"},{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the orders table. Here are the results:\n\nid: 1, user_id: 1, product_id: 1, quantity: 1, order_date: 2025-06-25\nid: 2, user_id: 2, product_id: 2, quantity: 2, order_date: 2025-06-24\nid: 3, user_id: 3, product_id: 3, quantity: 1, order_date: 2025-06-23\nid: 4, user_id: 1, product_id: 3, quantity: 1, order_date: 2025-06-22\n"}],"role":"model"}
+{"parts":[{"text":"list users"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"name\": \"Bob Smith\",\n  \"email\": \"bob@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"name\": \"Charlie Lee\",\n  \"email\": \"charlie@example.com\"\n}"}],"structuredContent":{"result":[{"id":1,"name":"Alice Johnson","email":"alice@example.com"},{"id":2,"name":"Bob Smith","email":"bob@example.com"},{"id":3,"name":"Charlie Lee","email":"charlie@example.com"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the users table. Here are the results:\n\nid: 1, name: Alice Johnson, email: alice@example.com\nid: 2, name: Bob Smith, email: bob@example.com\nid: 3, name: Charlie Lee, email: charlie@example.com\n"}],"role":"model"}
+{"parts":[{"text":"How many records are present in each of the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT COUNT(*) FROM orders"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM products"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 4\n}"}],"structuredContent":{"result":[{"COUNT(*)":4}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. Here's the number of records in each table:\n\n*   **orders:** 4 records\n*   **products:** 3 records\n*   **users:** 3 records\n"}],"role":"model"}
+{"parts":[{"text":"Which table has the largest number of records"}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_query: {'query': {'title': 'Query', 'type': <Type.STRING: 'STRING'>}, 'params': {'any_of': [{'items': {'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, {'nullable': True, 'type': <Type.OBJECT: 'OBJECT'>}], 'title': 'Params'}, 'fetch_all': {'default': True, 'title': 'Fetch All', 'type': <Type.BOOLEAN: 'BOOLEAN'>}, 'row_limit': {'default': 1000, 'title': 'Row Limit', 'type': <Type.INTEGER: 'INTEGER'>}}
+list_tables: {}
+describe_table: {'table_name': {'title': 'Table Name', 'type': <Type.STRING: 'STRING'>}}
+get_alerts: {'state': {'title': 'State', 'type': <Type.STRING: 'STRING'>}}
+get_forecast: {'latitude': {'title': 'Latitude', 'type': <Type.NUMBER: 'NUMBER'>}, 'longitude': {'title': 'Longitude', 'type': <Type.NUMBER: 'NUMBER'>}}
+-----------------------------------------------------------
+
+2025-07-05 14:41:35,553 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-05 14:41:36,416 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+The `orders` table has the largest number of records (4). The `products` and `users` tables each have 3 records.
+
+-----------------------------------------------------------
+Function calls:
+
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Sat, 05 Jul 2025 18:41:36 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=619","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"text":"The `orders` table has the largest number of records (4). The `products` and `users` tables each have 3 records.\n"}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.08973721663157146}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":30,"candidates_tokens_details":[{"modality":"TEXT","token_count":30}],"prompt_token_count":2124,"prompt_tokens_details":[{"modality":"TEXT","token_count":2124}],"total_token_count":2154},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-05 14:41:36,417 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"text":"The `orders` table has the largest number of records (4). The `products` and `users` tables each have 3 records.\n"}],"role":"model"},"usageMetadata":{"candidatesTokenCount":30,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":30}],"promptTokenCount":2124,"promptTokensDetails":[{"modality":"TEXT","tokenCount":2124}],"totalTokenCount":2154},"invocationId":"e-91555db0-41d1-4170-b79d-e5b7333b347a","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"yP4NSlqg","timestamp":1751740895.503093}
+INFO:     127.0.0.1:59724 - "GET /apps/sqlite-agent/users/user/sessions/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59732 - "GET /debug/trace/session/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59787 - "POST /run_sse HTTP/1.1" 200 OK
+2025-07-05 14:42:10,145 - INFO - envs.py:47 - Loaded .env file for sqlite-agent at /Users/binu.b.varghese/source/mcp/mcp_sse/streamhttp/client/goog-adk-client/sqlite-agent/.env
+2025-07-05 14:42:10,148 - INFO - mcp_session_manager.py:289 - Cleaning up disconnected session: session_no_headers
+2025-07-05 14:42:10,152 - INFO - _client.py:1740 - HTTP Request: DELETE http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:10,154 - INFO - _client.py:1740 - HTTP Request: DELETE http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:10,155 - WARNING - mcp_session_manager.py:293 - Error during disconnected session cleanup: Attempted to exit cancel scope in a different task than it was entered in
+2025-07-05 14:42:10,173 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:10,183 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:10,183 - INFO - streamable_http.py:134 - Received session ID: bda0938b31764ffbba0350e1e434c894
+2025-07-05 14:42:10,184 - INFO - streamable_http.py:146 - Negotiated protocol version: 2025-06-18
+2025-07-05 14:42:10,188 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:10,188 - INFO - _client.py:1740 - HTTP Request: GET http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:10,190 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 202 Accepted"
+2025-07-05 14:42:10,191 - INFO - _client.py:1740 - HTTP Request: GET http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:10,193 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:10,196 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:10,198 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:10,198 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:10,198 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:10,198 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:10,199 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:10,240 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-05 14:42:10,241 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+
+    Role: You are an intelligent SQLite Database Assistant. Your primary goal is to help users explore and retrieve information from a SQLite database using the provided tools.
+
+    Available Tools:
+    You have access to the following tools to interact with the database:
+
+      list_tables(): To get a list of all available tables in the database.
+      describe_table(table_name: str): To retrieve the schema (column names, types, etc.) for a specific table.
+      read_query(query: str, params: Optional[List[Any]] = None, fetch_all: bool = True, row_limit: int = 1000): To execute a SELECT or WITH SQL query and retrieve data.
+
+    General Guidelines:
+
+    Understand the User's Goal: Before executing any tool, try to understand what information the user is trying to find.
+
+    Tool Selection Flow:
+
+      To find out what data is available: Start by calling list_tables() to get a list of all tables.
+      To understand a table's structure: After listing tables, use describe_table(table_name="your_table_name") for any table the user is interested in or that seems relevant.
+      To retrieve data: Use read_query(query="SQL_QUERY_STRING") to fetch data.
+
+    SQL Query Best Practices for read_query:
+
+      Read-Only: The read_query tool is strictly for SELECT or WITH statements. You MUST NOT attempt to execute INSERT, UPDATE, DELETE, CREATE, DROP, or any other data modification or DDL (Data Definition Language) queries.
+      Single Statement: Only one SQL statement is allowed per read_query call. Do not include semicolons (;) within the query if they separate multiple statements.
+      Row Limit: The read_query tool has a default row_limit of 1000. If the user asks for "all" data or a large dataset, consider mentioning this limit or asking if they want to override it.
+      Parameters: If the user provides values for filtering (e.g., WHERE name = 'Alice'), use parameterized queries with the params argument to prevent SQL injection. For example: read_query(query="SELECT * FROM users WHERE name = ?", params=["Alice"]).
+      Error Handling: If a query fails (e.g., table not found, invalid SQL syntax), inform the user about the error message returned by the tool.
+
+    User Interaction:
+
+      Always acknowledge the user's request.
+      If you need more information (e.g., which table to describe, what data to filter by), ask clarifying questions.
+      Present the results from the tools in a clear and readable format.
+      If a tool call results in an error, explain what happened to the user.
+
+    Example Conversation Flow:
+
+      User: "What tables are in the database?"
+      Agent (calls list_tables()): "The tables available are: users, products, orders."
+      User: "Can you show me the schema for the users table?"
+      Agent (calls describe_table(table_name="users")): "The users table has the following columns: id (INTEGER, PK), name (TEXT), email (TEXT), created_at (TEXT)."
+      User: "Show me the first 5 users."
+      Agent (calls read_query(query="SELECT * FROM users LIMIT 5")): "Here are the first 5 users: [list of user data]"
+
+    By following these instructions, you will be able to effectively assist users in exploring their SQLite database.
+
+
+You are an agent. Your internal name is "sqlite_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{},"name":"list_tables"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"list_tables","response":{"result":{"content":[{"type":"text","text":"orders"},{"type":"text","text":"products"},{"type":"text","text":"sqlite_sequence"},{"type":"text","text":"users"}],"structuredContent":{"result":["orders","products","sqlite_sequence","users"]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. The tables in the database are: orders, products, sqlite_sequence, and users.\n"}],"role":"model"}
+{"parts":[{"text":"select records from orders"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-25\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"user_id\": 2,\n  \"product_id\": 2,\n  \"quantity\": 2,\n  \"order_date\": \"2025-06-24\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"user_id\": 3,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-23\"\n}"},{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":1,"user_id":1,"product_id":1,"quantity":1,"order_date":"2025-06-25"},{"id":2,"user_id":2,"product_id":2,"quantity":2,"order_date":"2025-06-24"},{"id":3,"user_id":3,"product_id":3,"quantity":1,"order_date":"2025-06-23"},{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the orders table. Here are the results:\n\nid: 1, user_id: 1, product_id: 1, quantity: 1, order_date: 2025-06-25\nid: 2, user_id: 2, product_id: 2, quantity: 2, order_date: 2025-06-24\nid: 3, user_id: 3, product_id: 3, quantity: 1, order_date: 2025-06-23\nid: 4, user_id: 1, product_id: 3, quantity: 1, order_date: 2025-06-22\n"}],"role":"model"}
+{"parts":[{"text":"list users"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"name\": \"Bob Smith\",\n  \"email\": \"bob@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"name\": \"Charlie Lee\",\n  \"email\": \"charlie@example.com\"\n}"}],"structuredContent":{"result":[{"id":1,"name":"Alice Johnson","email":"alice@example.com"},{"id":2,"name":"Bob Smith","email":"bob@example.com"},{"id":3,"name":"Charlie Lee","email":"charlie@example.com"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the users table. Here are the results:\n\nid: 1, name: Alice Johnson, email: alice@example.com\nid: 2, name: Bob Smith, email: bob@example.com\nid: 3, name: Charlie Lee, email: charlie@example.com\n"}],"role":"model"}
+{"parts":[{"text":"How many records are present in each of the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT COUNT(*) FROM orders"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM products"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 4\n}"}],"structuredContent":{"result":[{"COUNT(*)":4}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. Here's the number of records in each table:\n\n*   **orders:** 4 records\n*   **products:** 3 records\n*   **users:** 3 records\n"}],"role":"model"}
+{"parts":[{"text":"Which table has the largest number of records"}],"role":"user"}
+{"parts":[{"text":"The `orders` table has the largest number of records (4). The `products` and `users` tables each have 3 records.\n"}],"role":"model"}
+{"parts":[{"text":"Which order is the oldest order"}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_query: {'query': {'title': 'Query', 'type': <Type.STRING: 'STRING'>}, 'params': {'any_of': [{'items': {'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, {'nullable': True, 'type': <Type.OBJECT: 'OBJECT'>}], 'title': 'Params'}, 'fetch_all': {'default': True, 'title': 'Fetch All', 'type': <Type.BOOLEAN: 'BOOLEAN'>}, 'row_limit': {'default': 1000, 'title': 'Row Limit', 'type': <Type.INTEGER: 'INTEGER'>}}
+list_tables: {}
+describe_table: {'table_name': {'title': 'Table Name', 'type': <Type.STRING: 'STRING'>}}
+get_alerts: {'state': {'title': 'State', 'type': <Type.STRING: 'STRING'>}}
+get_forecast: {'latitude': {'title': 'Latitude', 'type': <Type.NUMBER: 'NUMBER'>}, 'longitude': {'title': 'Longitude', 'type': <Type.NUMBER: 'NUMBER'>}}
+-----------------------------------------------------------
+
+2025-07-05 14:42:10,241 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-05 14:42:11,035 - WARNING - types.py:5158 - Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-07-05 14:42:11,035 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+None
+-----------------------------------------------------------
+Function calls:
+name: read_query, args: {'query': 'SELECT * FROM orders ORDER BY order_date ASC LIMIT 1'}
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Sat, 05 Jul 2025 18:42:11 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=646","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders ORDER BY order_date ASC LIMIT 1"},"name":"read_query"}}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.0006839875679682283}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":17,"candidates_tokens_details":[{"modality":"TEXT","token_count":17}],"prompt_token_count":2160,"prompt_tokens_details":[{"modality":"TEXT","token_count":2160}],"total_token_count":2177},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-05 14:42:11,036 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionCall":{"id":"adk-a6554c0f-33a4-4b6e-b809-80e1c09a4612","args":{"query":"SELECT * FROM orders ORDER BY order_date ASC LIMIT 1"},"name":"read_query"}}],"role":"model"},"usageMetadata":{"candidatesTokenCount":17,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":17}],"promptTokenCount":2160,"promptTokensDetails":[{"modality":"TEXT","tokenCount":2160}],"totalTokenCount":2177},"invocationId":"e-8cafb194-2a19-4060-8798-2bdf04dcd6ba","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"longRunningToolIds":[],"id":"S2KmeLUg","timestamp":1751740930.200559}
+2025-07-05 14:42:11,040 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:11,044 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:11,057 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"functionResponse":{"id":"adk-a6554c0f-33a4-4b6e-b809-80e1c09a4612","name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"},"invocationId":"e-8cafb194-2a19-4060-8798-2bdf04dcd6ba","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"XcizkhBD","timestamp":1751740931.056838}
+2025-07-05 14:42:11,068 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp "HTTP/1.1 307 Temporary Redirect"
+2025-07-05 14:42:11,071 - INFO - _client.py:1740 - HTTP Request: POST http://localhost:8123/mcp/ "HTTP/1.1 200 OK"
+2025-07-05 14:42:11,073 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:11,073 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:11,073 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:11,073 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:11,074 - WARNING - base_authenticated_tool.py:72 - auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+2025-07-05 14:42:11,120 - INFO - google_llm.py:90 - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-05 14:42:11,121 - INFO - google_llm.py:96 -
+LLM Request:
+-----------------------------------------------------------
+System Instruction:
+
+    Role: You are an intelligent SQLite Database Assistant. Your primary goal is to help users explore and retrieve information from a SQLite database using the provided tools.
+
+    Available Tools:
+    You have access to the following tools to interact with the database:
+
+      list_tables(): To get a list of all available tables in the database.
+      describe_table(table_name: str): To retrieve the schema (column names, types, etc.) for a specific table.
+      read_query(query: str, params: Optional[List[Any]] = None, fetch_all: bool = True, row_limit: int = 1000): To execute a SELECT or WITH SQL query and retrieve data.
+
+    General Guidelines:
+
+    Understand the User's Goal: Before executing any tool, try to understand what information the user is trying to find.
+
+    Tool Selection Flow:
+
+      To find out what data is available: Start by calling list_tables() to get a list of all tables.
+      To understand a table's structure: After listing tables, use describe_table(table_name="your_table_name") for any table the user is interested in or that seems relevant.
+      To retrieve data: Use read_query(query="SQL_QUERY_STRING") to fetch data.
+
+    SQL Query Best Practices for read_query:
+
+      Read-Only: The read_query tool is strictly for SELECT or WITH statements. You MUST NOT attempt to execute INSERT, UPDATE, DELETE, CREATE, DROP, or any other data modification or DDL (Data Definition Language) queries.
+      Single Statement: Only one SQL statement is allowed per read_query call. Do not include semicolons (;) within the query if they separate multiple statements.
+      Row Limit: The read_query tool has a default row_limit of 1000. If the user asks for "all" data or a large dataset, consider mentioning this limit or asking if they want to override it.
+      Parameters: If the user provides values for filtering (e.g., WHERE name = 'Alice'), use parameterized queries with the params argument to prevent SQL injection. For example: read_query(query="SELECT * FROM users WHERE name = ?", params=["Alice"]).
+      Error Handling: If a query fails (e.g., table not found, invalid SQL syntax), inform the user about the error message returned by the tool.
+
+    User Interaction:
+
+      Always acknowledge the user's request.
+      If you need more information (e.g., which table to describe, what data to filter by), ask clarifying questions.
+      Present the results from the tools in a clear and readable format.
+      If a tool call results in an error, explain what happened to the user.
+
+    Example Conversation Flow:
+
+      User: "What tables are in the database?"
+      Agent (calls list_tables()): "The tables available are: users, products, orders."
+      User: "Can you show me the schema for the users table?"
+      Agent (calls describe_table(table_name="users")): "The users table has the following columns: id (INTEGER, PK), name (TEXT), email (TEXT), created_at (TEXT)."
+      User: "Show me the first 5 users."
+      Agent (calls read_query(query="SELECT * FROM users LIMIT 5")): "Here are the first 5 users: [list of user data]"
+
+    By following these instructions, you will be able to effectively assist users in exploring their SQLite database.
+
+
+You are an agent. Your internal name is "sqlite_agent".
+-----------------------------------------------------------
+Contents:
+{"parts":[{"text":"List the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{},"name":"list_tables"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"list_tables","response":{"result":{"content":[{"type":"text","text":"orders"},{"type":"text","text":"products"},{"type":"text","text":"sqlite_sequence"},{"type":"text","text":"users"}],"structuredContent":{"result":["orders","products","sqlite_sequence","users"]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. The tables in the database are: orders, products, sqlite_sequence, and users.\n"}],"role":"model"}
+{"parts":[{"text":"select records from orders"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-25\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"user_id\": 2,\n  \"product_id\": 2,\n  \"quantity\": 2,\n  \"order_date\": \"2025-06-24\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"user_id\": 3,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-23\"\n}"},{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":1,"user_id":1,"product_id":1,"quantity":1,"order_date":"2025-06-25"},{"id":2,"user_id":2,"product_id":2,"quantity":2,"order_date":"2025-06-24"},{"id":3,"user_id":3,"product_id":3,"quantity":1,"order_date":"2025-06-23"},{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the orders table. Here are the results:\n\nid: 1, user_id: 1, product_id: 1, quantity: 1, order_date: 2025-06-25\nid: 2, user_id: 2, product_id: 2, quantity: 2, order_date: 2025-06-24\nid: 3, user_id: 3, product_id: 3, quantity: 1, order_date: 2025-06-23\nid: 4, user_id: 1, product_id: 3, quantity: 1, order_date: 2025-06-22\n"}],"role":"model"}
+{"parts":[{"text":"list users"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 1,\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 2,\n  \"name\": \"Bob Smith\",\n  \"email\": \"bob@example.com\"\n}"},{"type":"text","text":"{\n  \"id\": 3,\n  \"name\": \"Charlie Lee\",\n  \"email\": \"charlie@example.com\"\n}"}],"structuredContent":{"result":[{"id":1,"name":"Alice Johnson","email":"alice@example.com"},{"id":2,"name":"Bob Smith","email":"bob@example.com"},{"id":3,"name":"Charlie Lee","email":"charlie@example.com"}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. I have selected all the records from the users table. Here are the results:\n\nid: 1, name: Alice Johnson, email: alice@example.com\nid: 2, name: Bob Smith, email: bob@example.com\nid: 3, name: Charlie Lee, email: charlie@example.com\n"}],"role":"model"}
+{"parts":[{"text":"How many records are present in each of the tables"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT COUNT(*) FROM orders"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM products"},"name":"read_query"}},{"function_call":{"args":{"query":"SELECT COUNT(*) FROM users"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 4\n}"}],"structuredContent":{"result":[{"COUNT(*)":4}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}},{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"COUNT(*)\": 3\n}"}],"structuredContent":{"result":[{"COUNT(*)":3}]},"isError":false}}}}],"role":"user"}
+{"parts":[{"text":"OK. Here's the number of records in each table:\n\n*   **orders:** 4 records\n*   **products:** 3 records\n*   **users:** 3 records\n"}],"role":"model"}
+{"parts":[{"text":"Which table has the largest number of records"}],"role":"user"}
+{"parts":[{"text":"The `orders` table has the largest number of records (4). The `products` and `users` tables each have 3 records.\n"}],"role":"model"}
+{"parts":[{"text":"Which order is the oldest order"}],"role":"user"}
+{"parts":[{"function_call":{"args":{"query":"SELECT * FROM orders ORDER BY order_date ASC LIMIT 1"},"name":"read_query"}}],"role":"model"}
+{"parts":[{"function_response":{"name":"read_query","response":{"result":{"content":[{"type":"text","text":"{\n  \"id\": 4,\n  \"user_id\": 1,\n  \"product_id\": 3,\n  \"quantity\": 1,\n  \"order_date\": \"2025-06-22\"\n}"}],"structuredContent":{"result":[{"id":4,"user_id":1,"product_id":3,"quantity":1,"order_date":"2025-06-22"}]},"isError":false}}}}],"role":"user"}
+-----------------------------------------------------------
+Functions:
+read_query: {'query': {'title': 'Query', 'type': <Type.STRING: 'STRING'>}, 'params': {'any_of': [{'items': {'type': <Type.OBJECT: 'OBJECT'>}, 'type': <Type.ARRAY: 'ARRAY'>}, {'nullable': True, 'type': <Type.OBJECT: 'OBJECT'>}], 'title': 'Params'}, 'fetch_all': {'default': True, 'title': 'Fetch All', 'type': <Type.BOOLEAN: 'BOOLEAN'>}, 'row_limit': {'default': 1000, 'title': 'Row Limit', 'type': <Type.INTEGER: 'INTEGER'>}}
+list_tables: {}
+describe_table: {'table_name': {'title': 'Table Name', 'type': <Type.STRING: 'STRING'>}}
+get_alerts: {'state': {'title': 'State', 'type': <Type.STRING: 'STRING'>}}
+get_forecast: {'latitude': {'title': 'Latitude', 'type': <Type.NUMBER: 'NUMBER'>}, 'longitude': {'title': 'Longitude', 'type': <Type.NUMBER: 'NUMBER'>}}
+-----------------------------------------------------------
+
+2025-07-05 14:42:11,121 - INFO - models.py:7421 - AFC is enabled with max remote calls: 10.
+2025-07-05 14:42:11,988 - INFO - google_llm.py:175 -
+LLM Response:
+-----------------------------------------------------------
+Text:
+The oldest order is order id 4, placed on 2025-06-22. The user ID is 1, the product ID is 3, and the quantity is 1.
+
+-----------------------------------------------------------
+Function calls:
+
+-----------------------------------------------------------
+Raw response:
+{"sdk_http_response":{"headers":{"Content-Type":"application/json; charset=UTF-8","Vary":"Referer","Content-Encoding":"gzip","Date":"Sat, 05 Jul 2025 18:42:12 GMT","Server":"scaffolding on HTTPServer2","X-XSS-Protection":"0","X-Frame-Options":"SAMEORIGIN","X-Content-Type-Options":"nosniff","Server-Timing":"gfet4t7; dur=751","Alt-Svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000","Transfer-Encoding":"chunked"}},"candidates":[{"content":{"parts":[{"text":"The oldest order is order id 4, placed on 2025-06-22. The user ID is 1, the product ID is 3, and the quantity is 1.\n"}],"role":"model"},"finish_reason":"STOP","avg_logprobs":-0.07114342053731283}],"model_version":"gemini-2.0-flash","usage_metadata":{"candidates_token_count":45,"candidates_tokens_details":[{"modality":"TEXT","token_count":45}],"prompt_token_count":2273,"prompt_tokens_details":[{"modality":"TEXT","token_count":2273}],"total_token_count":2318},"automatic_function_calling_history":[]}
+-----------------------------------------------------------
+
+2025-07-05 14:42:11,989 - INFO - fast_api.py:817 - Generated event in agent run streaming: {"content":{"parts":[{"text":"The oldest order is order id 4, placed on 2025-06-22. The user ID is 1, the product ID is 3, and the quantity is 1.\n"}],"role":"model"},"usageMetadata":{"candidatesTokenCount":45,"candidatesTokensDetails":[{"modality":"TEXT","tokenCount":45}],"promptTokenCount":2273,"promptTokensDetails":[{"modality":"TEXT","tokenCount":2273}],"totalTokenCount":2318},"invocationId":"e-8cafb194-2a19-4060-8798-2bdf04dcd6ba","author":"sqlite_agent","actions":{"stateDelta":{},"artifactDelta":{},"requestedAuthConfigs":{}},"id":"Q5FR5Etq","timestamp":1751740931.075907}
+INFO:     127.0.0.1:59787 - "GET /apps/sqlite-agent/users/user/sessions/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59799 - "GET /debug/trace/session/4a1e307c-54c2-442c-beb7-8249c987c666 HTTP/1.1" 200 OK
+
+
+Now Running it with a Runner in CLI chat
+==============================
+
+(sqlite-agent) ➜  sqlite-agent git:(mcp-streamhttp) ✗ uv run runner_cli.py
+Error initializing session, creating new one: 'ListSessionsResponse' object has no attribute 'session_ids'
+Chatbot initialized. Created new session due to error: fc166b0c-8570-4ee3-9472-6f786d0170a8
+Initial session state: {'welcome_message': 'Welcome to the SQLiteExplorer Helper chatbot!'}
+
+Minimal ADK Chatbot. Type 'exit' to quit.
+
+You: List tables
+/Users/binu.b.varghese/source/mcp/mcp_sse/streamhttp/client/goog-adk-client/sqlite-agent/.venv/lib/python3.12/site-packages/google/adk/tools/mcp_tool/mcp_tool.py:85: UserWarning: [EXPERIMENTAL] BaseAuthenticatedTool: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__(
+auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+(Debug: Adding session fc166b0c-8570-4ee3-9472-6f786d0170a8 to InMemoryMemoryService)
+Agent: The tables available are orders, products, sqlite_sequence, and users. Which table would you like to know more about?
+
+
+You: Get the count of rows in each of those tables
+Warning: there are non-text parts in the response: ['function_call', 'function_call', 'function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+(Debug: Adding session fc166b0c-8570-4ee3-9472-6f786d0170a8 to InMemoryMemoryService)
+Agent: Here's the row count for each of the tables:
+
+*   **orders:** 4 rows
+*   **products:** 3 rows
+*   **users:** 3 rows
+
+You: Which table has the most rows
+auth_config or auth_config.auth_scheme is missing. Will skip authentication.Using FunctionTool instead if authentication is not required.
+(Debug: Adding session fc166b0c-8570-4ee3-9472-6f786d0170a8 to InMemoryMemoryService)
+Agent: The `orders` table has the most rows with 4 rows.
+
+
+LLM answer questions, if it has facts. But every call it does a ListToolsRequest to see if there are any functions/tools
+
+
+
