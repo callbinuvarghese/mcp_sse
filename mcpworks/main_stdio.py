@@ -5,6 +5,7 @@ from server import mcp
 import tools.csv_tools
 import tools.parquet_tools
 import tools.research_tools
+import tools.sqllite_explorer
 
 def main():
     print("Hello from mcpworks!")

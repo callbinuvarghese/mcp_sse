@@ -200,3 +200,22 @@ INFO:     127.0.0.1:57305 - "POST /messages/?session_id=128b820190354d47a4d34747
 INFO:     127.0.0.1:57551 - "POST /messages/?session_id=128b820190354d47a4d34747ca7dfbbf HTTP/1.1" 202 Accepted
 [05/29/25 17:59:44] INFO     Processing request of type            server.py:556
                              ReadResourceRequest
+
+
+Adding SQLLite Explorer
+----------------------
+cd /Users/binu.b.varghese/source/mcp/mcp_sse/mcpworks
+
+touch tools/sqllite_explorer.py
+
+Create a test DB
+
+touch data/create_db.py
+cd data
+➜  data git:(main) ✗ python create_db.py
+✅ SQLite database created at: /Users/binu.b.varghese/source/mcp/mcp_sse/mcpworks/data/sqlite.db
+➜  data git:(main) ✗ cd ..
+
+
+Add import tools.sqllite_explorer to main_sse.py and main_stdio.py
+
