@@ -1,0 +1,94 @@
+
+# https://github.com/a2aproject/a2a-samples/blob/main/samples/python/agents/langgraph/README.md
+
+➜  a2a git:(main) ✗ cd langgraph
+➜  langgraph git:(main) ✗ ls
+app            Containerfile  pyproject.toml README.md      uv.lock
+(.venv) ➜  langgraph git:(main) ✗ pwd
+/Users/binu.b.varghese/source/mcp/mcp_sse/a2a/langgraph
+
+➜  langgraph git:(main) ✗ uv venv .venv
+
+Using CPython 3.12.8 interpreter at: /Users/binu.b.varghese/.pyenv/versions/3.12.8/bin/python3.12
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
+➜  langgraph git:(main) ✗ source .venv/bin/activate
+
+(.venv) ➜  langgraph git:(main) ✗ uv sync
+
+(.venv) ➜  langgraph git:(main) ✗ uv run app
+INFO:     Started server process [60038]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:10000 (Press CTRL+C to quit)
+
+INFO:     ::1:55604 - "GET /.well-known/agent-card.json HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: GET https://api.frankfurter.app/latest?from=USD&to=INR "HTTP/1.1 200 OK"
+INFO:     ::1:55604 - "POST / HTTP/1.1" 200 OK
+INFO:     ::1:55604 - "POST / HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: GET https://api.frankfurter.app/latest?from=USD&to=CAD "HTTP/1.1 200 OK"
+INFO:     ::1:55604 - "POST / HTTP/1.1" 200 OK
+INFO:     ::1:55604 - "POST / HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: GET https://api.frankfurter.app/latest?from=USD&to=INR "HTTP/1.1 200 OK"
+
+Another terminal
+➜  langgraph git:(main) ✗ source .venv/bin/activate
+(.venv) ➜  langgraph git:(main) ✗ uv run app/test_client.py
+(.venv) ➜  langgraph git:(main) ✗ uv run app/test_client.py
+INFO:__main__:Attempting to fetch public agent card from: http://localhost:10000/.well-known/agent-card.json
+INFO:httpx:HTTP Request: GET http://localhost:10000/.well-known/agent-card.json "HTTP/1.1 200 OK"
+INFO:a2a.client.card_resolver:Successfully fetched agent card data from http://localhost:10000/.well-known/agent-card.json: {'capabilities': {'pushNotifications': True, 'streaming': True}, 'defaultInputModes': ['text', 'text/plain'], 'defaultOutputModes': ['text', 'text/plain'], 'description': 'Helps with exchange rates for currencies', 'name': 'Currency Agent', 'preferredTransport': 'JSONRPC', 'protocolVersion': '0.3.0', 'skills': [{'description': 'Helps with exchange values between various currencies', 'examples': ['What is exchange rate between USD and GBP?'], 'id': 'convert_currency', 'name': 'Currency Exchange Rates Tool', 'tags': ['currency conversion', 'currency exchange']}], 'url': 'http://localhost:10000/', 'version': '1.0.0'}
+INFO:__main__:Successfully fetched public agent card:
+INFO:__main__:{
+  "capabilities": {
+    "pushNotifications": true,
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text",
+    "text/plain"
+  ],
+  "description": "Helps with exchange rates for currencies",
+  "name": "Currency Agent",
+  "preferredTransport": "JSONRPC",
+  "protocolVersion": "0.3.0",
+  "skills": [
+    {
+      "description": "Helps with exchange values between various currencies",
+      "examples": [
+        "What is exchange rate between USD and GBP?"
+      ],
+      "id": "convert_currency",
+      "name": "Currency Exchange Rates Tool",
+      "tags": [
+        "currency conversion",
+        "currency exchange"
+      ]
+    }
+  ],
+  "url": "http://localhost:10000/",
+  "version": "1.0.0"
+}
+INFO:__main__:
+Using PUBLIC agent card for client initialization (default).
+INFO:__main__:
+Public card does not indicate support for an extended card. Using public card.
+/Users/binu.b.varghese/source/mcp/mcp_sse/a2a/langgraph/app/test_client.py:109: DeprecationWarning: A2AClient is deprecated and will be removed in a future version. Use ClientFactory to create a client with a JSON-RPC transport.
+  client = A2AClient(
+INFO:__main__:A2AClient initialized.
+INFO:httpx:HTTP Request: POST http://localhost:10000/ "HTTP/1.1 200 OK"
+{'id': '294dcb1e-3da7-4b5e-9aff-a012b9e595be', 'jsonrpc': '2.0', 'result': {'artifacts': [{'artifactId': '2f15bc27-97a3-4840-ba28-722749309ad3', 'name': 'conversion_result', 'parts': [{'kind': 'text', 'text': '10 USD is 874.6 INR.'}]}], 'contextId': 'bbcc8216-5ca7-4ff9-95d4-b40c1781dfba', 'history': [{'contextId': 'bbcc8216-5ca7-4ff9-95d4-b40c1781dfba', 'kind': 'message', 'messageId': '352916823ee14bda8c93a9df814ebe56', 'parts': [{'kind': 'text', 'text': 'how much is 10 USD in INR?'}], 'role': 'user', 'taskId': 'a2fd0d91-fb2f-4346-9888-e45130c01ba3'}, {'contextId': 'bbcc8216-5ca7-4ff9-95d4-b40c1781dfba', 'kind': 'message', 'messageId': 'acec3b78-1d1e-47a3-a318-3921be04448c', 'parts': [{'kind': 'text', 'text': 'Looking up the exchange rates...'}], 'role': 'agent', 'taskId': 'a2fd0d91-fb2f-4346-9888-e45130c01ba3'}, {'contextId': 'bbcc8216-5ca7-4ff9-95d4-b40c1781dfba', 'kind': 'message', 'messageId': '3dc55a18-3650-4bd5-8b69-650d558da9e8', 'parts': [{'kind': 'text', 'text': 'Processing the exchange rates..'}], 'role': 'agent', 'taskId': 'a2fd0d91-fb2f-4346-9888-e45130c01ba3'}], 'id': 'a2fd0d91-fb2f-4346-9888-e45130c01ba3', 'kind': 'task', 'status': {'state': 'completed', 'timestamp': '2025-08-18T12:57:01.297108+00:00'}}}
+INFO:httpx:HTTP Request: POST http://localhost:10000/ "HTTP/1.1 200 OK"
+{'id': '5275fb31-d2e4-4e29-bd6d-3e86d8f68da1', 'jsonrpc': '2.0', 'result': {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'history': [{'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': 'e2831b9c8dda432dae5eaedadf29df98', 'parts': [{'kind': 'text', 'text': 'How much is the exchange rate for 1 USD?'}], 'role': 'user', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}], 'id': 'b1855d0b-3c05-494f-978d-216704f5b9de', 'kind': 'task', 'status': {'message': {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': '1d2cac78-87a2-4379-b657-854006f2de43', 'parts': [{'kind': 'text', 'text': 'Could you please specify which currency you would like to convert to? For example, I can find the exchange rate from 1 USD to EUR, or 1 USD to JPY.'}], 'role': 'agent', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}, 'state': 'input-required', 'timestamp': '2025-08-18T12:57:03.342535+00:00'}}}
+INFO:httpx:HTTP Request: POST http://localhost:10000/ "HTTP/1.1 200 OK"
+{'id': '1d4fbc3a-842c-4b0f-9076-51ada2673919', 'jsonrpc': '2.0', 'result': {'artifacts': [{'artifactId': '6f18d0ed-d100-469d-af83-52c3f159b4e7', 'name': 'conversion_result', 'parts': [{'kind': 'text', 'text': 'The exchange rate for 1 USD to CAD is 1.3792.'}]}], 'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'history': [{'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': 'e2831b9c8dda432dae5eaedadf29df98', 'parts': [{'kind': 'text', 'text': 'How much is the exchange rate for 1 USD?'}], 'role': 'user', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}, {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': '1d2cac78-87a2-4379-b657-854006f2de43', 'parts': [{'kind': 'text', 'text': 'Could you please specify which currency you would like to convert to? For example, I can find the exchange rate from 1 USD to EUR, or 1 USD to JPY.'}], 'role': 'agent', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}, {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': '10acdfb9f927484ab69ddd47c2344ce6', 'parts': [{'kind': 'text', 'text': 'CAD'}], 'role': 'user', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}, {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': '86b7327d-0da4-440b-bc22-ab38092d3757', 'parts': [{'kind': 'text', 'text': 'Looking up the exchange rates...'}], 'role': 'agent', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}, {'contextId': 'dd1087d5-a40a-4287-9046-5830a1b38b14', 'kind': 'message', 'messageId': '71ee69ca-f4c8-4c5e-bef2-233228cf4495', 'parts': [{'kind': 'text', 'text': 'Processing the exchange rates..'}], 'role': 'agent', 'taskId': 'b1855d0b-3c05-494f-978d-216704f5b9de'}], 'id': 'b1855d0b-3c05-494f-978d-216704f5b9de', 'kind': 'task', 'status': {'state': 'completed', 'timestamp': '2025-08-18T12:57:06.182303+00:00'}}}
+INFO:httpx:HTTP Request: POST http://localhost:10000/ "HTTP/1.1 200 OK"
+{'id': '12efcb73-e0fd-4d4a-84cb-32de29601995', 'jsonrpc': '2.0', 'result': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'history': [{'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'kind': 'message', 'messageId': '352916823ee14bda8c93a9df814ebe56', 'parts': [{'kind': 'text', 'text': 'how much is 10 USD in INR?'}], 'role': 'user', 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}], 'id': '9f6e3277-2b94-4d64-a87a-9b7520b82b41', 'kind': 'task', 'status': {'state': 'submitted'}}}
+{'id': '12efcb73-e0fd-4d4a-84cb-32de29601995', 'jsonrpc': '2.0', 'result': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'final': False, 'kind': 'status-update', 'status': {'message': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'kind': 'message', 'messageId': 'ebde62c3-ba68-4a0c-b3d0-4ea86bb0afac', 'parts': [{'kind': 'text', 'text': 'Looking up the exchange rates...'}], 'role': 'agent', 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}, 'state': 'working', 'timestamp': '2025-08-18T12:57:07.248629+00:00'}, 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}}
+{'id': '12efcb73-e0fd-4d4a-84cb-32de29601995', 'jsonrpc': '2.0', 'result': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'final': False, 'kind': 'status-update', 'status': {'message': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'kind': 'message', 'messageId': '810addd7-36e5-4b1f-9e86-531330f062e5', 'parts': [{'kind': 'text', 'text': 'Processing the exchange rates..'}], 'role': 'agent', 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}, 'state': 'working', 'timestamp': '2025-08-18T12:57:07.390176+00:00'}, 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}}
+{'id': '12efcb73-e0fd-4d4a-84cb-32de29601995', 'jsonrpc': '2.0', 'result': {'artifact': {'artifactId': '23ab3a23-9851-49a7-b40f-346c0cce5dbe', 'name': 'conversion_result', 'parts': [{'kind': 'text', 'text': '10 USD is 874.6 INR'}]}, 'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'kind': 'artifact-update', 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}}
+{'id': '12efcb73-e0fd-4d4a-84cb-32de29601995', 'jsonrpc': '2.0', 'result': {'contextId': 'b314c29d-3e3a-4293-898d-944958a14b53', 'final': True, 'kind': 'status-update', 'status': {'state': 'completed', 'timestamp': '2025-08-18T12:57:09.023173+00:00'}, 'taskId': '9f6e3277-2b94-4d64-a87a-9b7520b82b41'}}

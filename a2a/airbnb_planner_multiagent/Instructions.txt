@@ -1,0 +1,104 @@
+➜  mcp_a2a git:(master) ✗ pwd
+/Users/binu.b.varghese/source/agent/mcp_a2a
+
+https://github.com/a2aproject/a2a-samples/tree/main/samples/python/agents/airbnb_planner_multiagent
+➜  mcp_a2a git:(master) ✗ cp -r  ../a2a/a2a-samples/samples/python/agents/airbnb_planner_multiagent .
+
+➜  airbnb_planner_multiagent git:(master) ✗ pwd
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent
+➜  edit .env
+➜  airbnb_planner_multiagent git:(master) ✗ uv venv .venv
+
+Using CPython 3.13.3
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
+
+➜  airbnb_planner_multiagent git:(master) ✗ source .venv/bin/activate
+(.venv) ➜  airbnb_planner_multiagent git:(master) ✗ uv sync --active
+
+(.venv) ➜  airbnb_planner_multiagent git:(master) ✗ cd airbnb_agent
+
+(.venv) ➜  airbnb_agent git:(master) ✗ cp ../.env .
+
+(.venv) ➜  airbnb_agent git:(master) ✗ uv run --active .
+Lifespan: Initializing MCP client and tools...
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+[2025-08-11T17:35:24.112Z] [INFO] Airbnb MCP Server starting: {
+  "version": "0.1.3",
+  "ignoreRobotsTxt": true,
+  "nodeVersion": "v24.4.0",
+  "platform": "darwin"
+}
+[2025-08-11T17:35:24.116Z] [INFO] Skipping robots.txt fetch (ignored by configuration)
+[2025-08-11T17:35:24.117Z] [INFO] Airbnb MCP Server running on stdio: {
+  "version": "0.1.3",
+  "robotsRespected": false
+}
+Lifespan: MCP Tools preloaded successfully (2 tools found).
+INFO:agent_executor:Initializing AirbnbAgentExecutor with 2 MCP tools.
+INFO:airbnb_agent:Initializing AirbnbAgent with preloaded MCP tools...
+INFO:airbnb_agent:ChatVertexAI model initialized successfully.
+Starting Uvicorn server at http://localhost:10002 with log-level info...
+INFO:     Started server process [20609]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:10002 (Press CTRL+C to quit)
+
+
+
+Run Weather Agent
+
+➜  airbnb_planner_multiagent git:(master) ✗ source .venv/bin/activate
+(.venv) ➜  airbnb_planner_multiagent git:(master) ✗ cd weather_agent
+(.venv) ➜  weather_agent git:(master) ✗ ls
+__init__.py         example.env         weather_agent.py    weather_mcp.py
+__main__.py         README.md           weather_executor.py
+➜  weather_agent git:(master) ✗ cp ../.env .
+(.venv) ➜  weather_agent git:(master) ✗ uv run --active .
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent/.venv/lib/python3.13/site-packages/pydantic/_internal/_fields.py:198: UserWarning: Field name "config_type" in "SequentialAgent" shadows an attribute in parent "BaseAgent"
+  warnings.warn(
+WARNING:google_adk.google.adk.tools.mcp_tool.mcp_session_manager:StdioServerParameters is not recommended. Please use StdioConnectionParams.
+INFO:     Started server process [26674]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:10001 (Press CTRL+C to quit)
+
+Run Host Agent
+
+➜  airbnb_planner_multiagent git:(master) ✗ source .venv/bin/activate
+(.venv) ➜  airbnb_planner_multiagent git:(master) ✗ pwd
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent
+➜  airbnb_planner_multiagent git:(master) ✗ cd host_agent
+➜  host_agent git:(master) ✗ pwd
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent/host_agent
+
+(.venv) ➜  host_agent git:(master) ✗ uv run --active .
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent/.venv/lib/python3.13/site-packages/pydantic/_internal/_fields.py:198: UserWarning: Field name "config_type" in "SequentialAgent" shadows an attribute in parent "BaseAgent"
+  warnings.warn(
+agent_card: additional_interfaces=None capabilities=AgentCapabilities(extensions=None, push_notifications=True, state_transition_history=None, streaming=True) default_input_modes=['text', 'text/plain'] default_output_modes=['text', 'text/plain'] description='Helps with searching accommodation' documentation_url=None icon_url=None name='Airbnb Agent' preferred_transport='JSONRPC' protocol_version='0.3.0' provider=None security=None security_schemes=None signatures=None skills=[AgentSkill(description='Helps with accommodation search using airbnb', examples=['Please find a room in LA, CA, April 15, 2025, checkout date is april 18, 2 adults'], id='airbnb_search', input_modes=None, name='Search airbnb accommodation', output_modes=None, security=None, tags=['airbnb accommodation'])] supports_authenticated_extended_card=None url='http://localhost:10002/' version='1.0.0'
+agent_url: http://localhost:10002
+agent_card: additional_interfaces=None capabilities=AgentCapabilities(extensions=None, push_notifications=None, state_transition_history=None, streaming=True) default_input_modes=['text'] default_output_modes=['text'] description='Helps with weather' documentation_url=None icon_url=None name='Weather Agent' preferred_transport='JSONRPC' protocol_version='0.3.0' provider=None security=None security_schemes=None signatures=None skills=[AgentSkill(description='Helps with weather in city, or states', examples=['weather in LA, CA'], id='weather_search', input_modes=None, name='Search weather', output_modes=None, security=None, tags=['weather'])] supports_authenticated_extended_card=None url='http://localhost:10001/' version='1.0.0'
+agent_url: http://localhost:10001
+Found agent card: {'capabilities': {'pushNotifications': True, 'streaming': True}, 'defaultInputModes': ['text', 'text/plain'], 'defaultOutputModes': ['text', 'text/plain'], 'description': 'Helps with searching accommodation', 'name': 'Airbnb Agent', 'preferredTransport': 'JSONRPC', 'protocolVersion': '0.3.0', 'skills': [{'description': 'Helps with accommodation search using airbnb', 'examples': ['Please find a room in LA, CA, April 15, 2025, checkout date is april 18, 2 adults'], 'id': 'airbnb_search', 'name': 'Search airbnb accommodation', 'tags': ['airbnb accommodation']}], 'url': 'http://localhost:10002/', 'version': '1.0.0'}
+====================================================================================================
+Found agent card: {'capabilities': {'streaming': True}, 'defaultInputModes': ['text'], 'defaultOutputModes': ['text'], 'description': 'Helps with weather', 'name': 'Weather Agent', 'preferredTransport': 'JSONRPC', 'protocolVersion': '0.3.0', 'skills': [{'description': 'Helps with weather in city, or states', 'examples': ['weather in LA, CA'], 'id': 'weather_search', 'name': 'Search weather', 'tags': ['weather']}], 'url': 'http://localhost:10001/', 'version': '1.0.0'}
+====================================================================================================
+Creating ADK session...
+ADK session created successfully.
+/Users/binu.b.varghese/source/agent/mcp_a2a/airbnb_planner_multiagent/.venv/lib/python3.13/site-packages/gradio/chat_interface.py:345: UserWarning: The 'tuples' format for chatbot messages is deprecated and will be removed in a future version of Gradio. Please set type='messages' instead, which uses openai-style 'role' and 'content' keys.
+  self.chatbot = Chatbot(
+Launching Gradio interface...
+* Running on local URL:  http://0.0.0.0:8083
+* To create a public link, set `share=True` in `launch()`.
+
+Use Chatbot
+browse to
+http://localhost:8083/
+
+Sample Prompts
+What is the weather in Los Angeles, CA?
+Please find a room in LA, CA, June 20-25, 2025, two adults
+
+
+The agent executor process may not be runnning while the host agent is started. In that case, that particular agent will not be included in the host agent orchestration
+
