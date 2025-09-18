@@ -6,7 +6,7 @@ FROM ghcr.io/astral-sh/uv:0.6.11-python3.12-bookworm-slim
 WORKDIR /app
 
 # Copy project metadata first to leverage Docker layer caching
-COPY pyproject.toml uv.lock* ./
+COPY ../pyproject.toml ../uv.lock* ./
 
 # Install only dependencies first (faster rebuilds)
 RUN --mount=type=cache,target=/root/.cache/uv \
