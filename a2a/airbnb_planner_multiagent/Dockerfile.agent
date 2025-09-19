@@ -1,31 +1,37 @@
 # syntax=docker/dockerfile:1
+FROM ghcr.io/astral-sh/uv:0.6.11-python3.12-bookworm-slim
 # one Dockerfile for building multiple agent containers with args as directory and module
 
-# 1) Base image with uv + Python
-FROM ghcr.io/astral-sh/uv:0.6.11-python3.12-bookworm-slim
-
-# 2) Build args: which agent folder to copy and which module to run
+# Build args (passed from cloudbuild step) 
+# AGENT_DIR passed in build docker phas as AGENT_DIR=a2a/airbnb_planner_multiagent/airbnb_agent
+# MODULE will be passed as either MODULE=airbnb_agent or host_agent
 ARG AGENT_DIR
 ARG MODULE
 
+# Show them in build logs and fail fast if missing
+RUN echo ">>> Build args:" && echo "    MODULE=${MODULE}" && echo "    AGENT_DIR=${AGENT_DIR}" \
+ && test -n "${MODULE}" || (echo "ERROR: MODULE is empty"; exit 1) \
+ && test -n "${AGENT_DIR}" || (echo "ERROR: AGENT_DIR is empty"; exit 1)
+
+# Make MODULE available at runtime too
+ENV MODULE=${MODULE}
+
 WORKDIR /app
 
-# 3) Install shared deps from the single pyproject.toml
+# Install shared deps (adjust if you have uv.lock)
 COPY a2a/airbnb_planner_multiagent/pyproject.toml ./pyproject.toml
-# If you later add a lock file, also:
-# COPY a2a/airbnb_planner_multiagent/uv.lock ./uv.lock
+RUN uv sync --no-install-project || true
 
-# Install dependencies into /app/.venv (no project install needed)
-RUN --mount=type=cache,target=/root/.cache/uv uv sync --no-install-project
-
-# 4) Copy only the selected agent’s code (module must have __main__.py)
+# Copy the selected agent’s code
 COPY ${AGENT_DIR}/ /app/${MODULE}/
+
+# Prove the files landed where expected
+RUN echo ">>> Post-COPY layout for /app/${MODULE}:" \
+ && ls -la /app/${MODULE} || (echo "ERROR: /app/${MODULE} missing"; exit 1) \
+ && test -f /app/${MODULE}/__main__.py || (echo "ERROR: __main__.py missing"; exit 1)
 
 ENV PATH="/app/.venv/bin:${PATH}"
 
-# 5) Run the selected module (shell form to expand ${MODULE})
-# CMD uv run python -m ${MODULE}
-
-EXPOSE 8081
-CMD uv run sh -lc 'python -m ${MODULE} --host 0.0.0.0 --port ${PORT:-8081}'
+# Optional: echo again at runtime, then start the server (good for troubleshooting)
+CMD uv run sh -lc 'echo "Runtime MODULE=${MODULE}"; echo "Runtime PORT=${PORT:-8080}"; exec python -m "${MODULE}" --host 0.0.0.0 --port "${PORT:-8080}"'
 
