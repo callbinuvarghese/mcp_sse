@@ -20,7 +20,12 @@ WORKDIR /app
 
 # Install shared deps (adjust if you have uv.lock)
 COPY a2a/airbnb_planner_multiagent/pyproject.toml ./pyproject.toml
-RUN uv sync --no-install-project || true
+COPY a2a/airbnb_planner_multiagent/uv.lock ./uv.lock
+
+# 2) Install exactly what’s in the lock
+RUN uv sync --no-install-project --frozen
+# lock dependenacy has issue. so using uv.lock
+#RUN uv sync --no-install-project || true
 
 # Copy the selected agent’s code
 COPY ${AGENT_DIR}/ /app/${MODULE}/
