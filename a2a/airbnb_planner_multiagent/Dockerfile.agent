@@ -24,4 +24,8 @@ COPY ${AGENT_DIR}/ /app/${MODULE}/
 ENV PATH="/app/.venv/bin:${PATH}"
 
 # 5) Run the selected module (shell form to expand ${MODULE})
-CMD uv run python -m ${MODULE}
+# CMD uv run python -m ${MODULE}
+
+EXPOSE 8081
+CMD uv run sh -lc 'python -m ${MODULE} --host 0.0.0.0 --port ${PORT:-8081}'
+
