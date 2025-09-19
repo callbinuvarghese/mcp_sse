@@ -19,12 +19,9 @@ from a2a.types import (
     AgentCard,
     AgentSkill,
 )
-from agent_executor import (
-    AirbnbAgentExecutor,
-)
-from airbnb_agent import (
-    AirbnbAgent,
-)
+from .agent_executor import AirbnbAgentExecutor
+from .airbnb_agent import AirbnbAgent
+
 from dotenv import load_dotenv
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
