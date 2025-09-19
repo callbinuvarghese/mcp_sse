@@ -190,8 +190,16 @@ def main(
     except Exception as e:
         print(f'An unexpected error occurred in main: {e}', file=sys.stderr)
         sys.exit(1)
-
-
+        
+def _resolve_base_url(host: str, port: int) -> str:
+    # Prefer explicit public URL in Cloud Run
+    base = os.getenv("PUBLIC_BASE_URL")
+    if base:
+        return base.rstrip("/") + "/"
+    else:
+        url=f'http://{host}:{port}/'
+        return url
+        
 def get_agent_card(host: str, port: int):
     """Returns the Agent Card for the Currency Agent."""
     capabilities = AgentCapabilities(streaming=True, push_notifications=True)
@@ -204,10 +212,11 @@ def get_agent_card(host: str, port: int):
             'Please find a room in LA, CA, April 15, 2025, checkout date is april 18, 2 adults'
         ],
     )
+    base_url = _resolve_base_url(host, port)
     return AgentCard(
         name='Airbnb Agent',
         description='Helps with searching accommodation',
-        url=f'http://{host}:{port}/',
+        url=base_url, 
         version='1.0.0',
         default_input_modes=AirbnbAgent.SUPPORTED_CONTENT_TYPES,
         default_output_modes=AirbnbAgent.SUPPORTED_CONTENT_TYPES,
