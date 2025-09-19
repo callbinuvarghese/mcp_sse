@@ -35,8 +35,20 @@ RUN echo ">>> Post-COPY layout for /app/${MODULE}:" \
  && ls -la /app/${MODULE} || (echo "ERROR: /app/${MODULE} missing"; exit 1) \
  && test -f /app/${MODULE}/__main__.py || (echo "ERROR: __main__.py missing"; exit 1)
 
+# 4) Fail fast if deps aren’t importable (build-time sanity check)
+RUN /app/.venv/bin/python - <<'PY'
+import sys
+print("Python:", sys.version, "Exe:", sys.executable)
+for pkg in ("click","fastapi","uvicorn"):
+    __import__(pkg)
+print("Imports OK")
+PY
+
 ENV PATH="/app/.venv/bin:${PATH}"
 
+# 5) Run with the venv interpreter, not system python
+#    (Shell form so ${MODULE} and ${PORT} expand at runtime)
+CMD /app/.venv/bin/python -m "${MODULE}" --host 0.0.0.0 --port "${PORT:-8080}"
 # Optional: echo again at runtime, then start the server (good for troubleshooting)
-CMD uv run sh -lc 'echo "Runtime MODULE=${MODULE}"; echo "Runtime PORT=${PORT:-8080}"; exec python -m "${MODULE}" --host 0.0.0.0 --port "${PORT:-8080}"'
+#CMD uv run sh -lc 'echo "Runtime MODULE=${MODULE}"; echo "Runtime PORT=${PORT:-8080}"; exec python -m "${MODULE}" --host 0.0.0.0 --port "${PORT:-8080}"'
 
