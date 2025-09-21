@@ -2,6 +2,8 @@ cd /Users/binu.b.varghese/source/agent/a2a
 
 Build the airbnb_agent
 
+cd /Users/binu.b.varghese/source/agent/a2a/a2a/airbnb_planner_multiagent
+source .venv/bin/activate
 
 (.venv) ➜  client pwd
 /Users/binu.b.varghese/source/agent/a2a/a2a/airbnb_planner_multiagent/client
