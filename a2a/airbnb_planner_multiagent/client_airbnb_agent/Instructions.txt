@@ -1,0 +1,153 @@
+cd /Users/binu.b.varghese/source/agent/a2a
+
+Build the airbnb_agent
+
+
+(.venv) ➜  client pwd
+/Users/binu.b.varghese/source/agent/a2a/a2a/airbnb_planner_multiagent/client
+
+(.venv) ➜  a2a cat build_airbnb_agent.sh
+docker build -f a2a/airbnb_planner_multiagent/Dockerfile.agent --build-arg AGENT_DIR=a2a/airbnb_planner_multiagent/airbnb_agent --build-arg MODULE=airbnb_agent -t airbnb_agent .%
+
+(.venv) ➜  a2a ./build_airbnb_agent.sh
+[+] Building 465.7s (22/22) FINISHED
+ => [internal] load .dockerignore                                          0.1s
+ => => transferring context: 2B                                            0.1s
+ => [internal] load build definition from Dockerfile.agent                 0.2s
+ => => transferring dockerfile: 3.49kB                                     0.1s
+ => resolve image config for docker.io/docker/dockerfile:1                 1.6s
+ => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:dabfc0969b  0.0s
+ => [internal] load build definition from Dockerfile.agent                 0.0s
+ => [internal] load metadata for ghcr.io/astral-sh/uv:0.6.11-python3.12-b  1.2s
+ => [internal] load .dockerignore                                          0.0s
+ => [ 1/13] FROM ghcr.io/astral-sh/uv:0.6.11-python3.12-bookworm-slim@sha  0.0s
+ => [internal] load build context                                          0.3s
+ => => transferring context: 374.22kB                                      0.2s
+ => CACHED [ 2/13] RUN echo ">>> Build args:" && echo "    MODULE=airbnb_  0.0s
+ => CACHED [ 3/13] WORKDIR /app                                            0.0s
+ => CACHED [ 4/13] RUN apt-get update && apt-get install -y --no-install-  0.0s
+ => CACHED [ 5/13] COPY a2a/airbnb_planner_multiagent/pyproject.toml ./py  0.0s
+ => [ 6/13] COPY a2a/airbnb_planner_multiagent/uv.lock ./uv.lock           0.3s
+ => [ 7/13] RUN uv sync --no-install-project --frozen                    131.2s
+ => [ 8/13] COPY a2a/airbnb_planner_multiagent/airbnb_agent/ /app/airbnb_  0.8s
+ => [ 9/13] RUN echo ">>> Post-COPY layout for /app/airbnb_agent:"  && ls  2.3s
+ => [10/13] RUN /app/.venv/bin/python - <<'PY'                            13.6s
+ => [11/13] RUN /app/.venv/bin/python - <<'PY'                             6.1s
+ => [12/13] RUN cat >/entrypoint.sh <<'SH'                                 2.6s
+ => [13/13] RUN chmod +x /entrypoint.sh                                    2.6s
+ => exporting to image                                                   301.4s
+ => => exporting layers                                                  301.4s
+ => => writing image sha256:a1cea8e75734ed90ea2f9aa45d2e04669fccca3389071  0.0s
+ => => naming to docker.io/library/airbnb_agent:latest                     0.0s
+
+
+(.venv) ➜  a2a ./run_airbnb_agent.sh
+Runtime MODULE=airbnb_agent
+Runtime PORT=8081
+Python: Python 3.13.2
+sys.executable: /app/.venv/bin/python
+<stdin>:5: DeprecationWarning: The '__version__' attribute is deprecated and will be removed in Click 9.1. Use feature detection or 'importlib.metadata.version("click")' instead.
+click: 8.2.1
+PROJECT= ai-project-444521 LOCATION= us-central1 MODEL= "gemini-2.5-flash"
+OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
+2025-09-19 22:02:16.373 | DEBUG    | __main__:main:270 - host:0.0.0.0
+2025-09-19 22:02:16.373 | DEBUG    | __main__:main:272 - port:8081
+2025-09-19 22:02:16.374 | DEBUG    | __main__:main:274 - log_level:info
+2025-09-19 22:02:16.375 | DEBUG    | __main__:main:275 - mcpconf:LOCAL; mcpconf from CONTAINER_MCP:"CONTAINER"
+2025-09-19 22:02:16 | INFO     | __main__:main:280 - Starting Airbnb Agent server...
+2025-09-19 22:02:16 | INFO     | __main__:validate_environment:97 - Environment validation passed
+2025-09-19 22:02:16,468 - DEBUG - Using selector: EpollSelector
+[2025-09-19T22:02:22.910Z] [INFO] Airbnb MCP Server starting: {
+  "version": "0.1.3",
+  "ignoreRobotsTxt": true,
+  "nodeVersion": "v22.19.0",
+  "platform": "linux"
+}
+[2025-09-19T22:02:22.920Z] [INFO] Skipping robots.txt fetch (ignored by configuration)
+[2025-09-19T22:02:22.928Z] [INFO] Airbnb MCP Server running on stdio: {
+  "version": "0.1.3",
+  "robotsRespected": false
+}
+[2025-09-19T22:02:26.077Z] [INFO] Airbnb MCP Server starting: {
+  "version": "0.1.3",
+  "ignoreRobotsTxt": true,
+  "nodeVersion": "v22.19.0",
+  "platform": "linux"
+}
+[2025-09-19T22:02:26.108Z] [INFO] Skipping robots.txt fetch (ignored by configuration)
+[2025-09-19T22:02:26.113Z] [INFO] Airbnb MCP Server running on stdio: {
+  "version": "0.1.3",
+  "robotsRespected": false
+}
+2025-09-19 22:02:26 | INFO     | __main__:app_lifespan:182 - MCP tools loaded successfully (2 tools available)
+2025-09-19 22:02:26,469 - INFO - Initializing AirbnbAgentExecutor with 2 MCP tools.
+2025-09-19 22:02:26,470 - INFO - Initializing AirbnbAgent with preloaded MCP tools...
+2025-09-19 22:02:26,830 - INFO - ChatGoogleGenerativeAI model initialized successfully.
+2025-09-19 22:02:26,831 - DEBUG - Initializing InMemoryTaskStore
+2025-09-19 22:02:26 | INFO     | __main__:run_server_async:296 - Starting Uvicorn server at http://0.0.0.0:8081
+2025-09-19 22:02:26 | INFO     | __main__:run_server_async:297 - Log level: info
+2025-09-19 22:02:26 | INFO     | __main__:run_server_async:298 - Press Ctrl+C to stop the server
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8081 (Press CTRL+C to quit)
+
+2025-09-19 22:11:14,969 - WARNING - Deprecated agent card endpoint '/.well-known/agent.json' accessed. Please use '/.well-known/agent-card.json' instead. This endpoint will be removed in a future version.
+
+
+Test server running on CONTAINER
+
+(.venv) ➜  client uv run --active simple_client.py --base-url http://localhost:8081
+Probing http://localhost:8081/
+• /healthz: 200 {
+  "mcp_tool_count": 2,
+  "mcp_tools_loaded": true,
+  "ok": true,
+  "service": "airbnb-agent",
+  "time": "2025-09-19T22:12:55.923895+00:00",
+  "version": "1.0.0"
+}
+
+✅ AgentCard found at /.well-known/agent-card.json:
+{
+  "capabilities": {
+    "pushNotifications": true,
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "text",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text",
+    "text/plain"
+  ],
+  "description": "AI agent that helps with searching and finding accommodation on Airbnb",
+  "name": "Airbnb Agent",
+  "preferredTransport": "JSONRPC",
+  "protocolVersion": "0.3.0",
+  "skills": [
+    {
+      "description": "Helps with accommodation search using Airbnb",
+      "examples": [
+        "Find a room in LA, CA for April 15-18, 2025, for 2 adults",
+        "Search for apartments in New York City for next weekend",
+        "Look for vacation rentals in Paris for a family of 4"
+      ],
+      "id": "airbnb_search",
+      "name": "Search Airbnb accommodation",
+      "tags": [
+        "airbnb",
+        "accommodation",
+        "travel",
+        "booking"
+      ]
+    }
+  ],
+  "url": "http://localhost:8081/",
+  "version": "1.0.0"
+}
+
+Capabilities summary:
+  - pushNotifications: True
+  - streaming: True
